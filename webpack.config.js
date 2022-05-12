@@ -6,7 +6,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
-    clean: true
+    clean: true,
   },
   devtool: 'source-map',
   plugins: [
@@ -14,4 +14,13 @@ module.exports = {
       patterns: [{ from: 'public' }],
     }),
   ],
-}
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: ['babel-loader']
+      }
+    ]
+  }
+};
