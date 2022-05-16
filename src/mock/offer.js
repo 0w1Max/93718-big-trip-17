@@ -1,7 +1,10 @@
+import {createId} from '../utils.js';
 import {TYPES, DESCRIPTIONS} from '../const.js';
 
+const offerId = new createId();
+
 const generateOffer = () => ({
-    id: 1,
+    id: offerId.add(),
     title: DESCRIPTIONS[0],
     price: 120
 });

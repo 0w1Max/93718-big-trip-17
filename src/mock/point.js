@@ -1,7 +1,9 @@
-import {getRandomInteger, generateDate} from '../utils.js';
+import {getRandomInteger, generateDate, isFavorite, createId} from '../utils.js';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
+
+const pointId = new createId();
 
 export const generatePoint = () => {
   const dateFrom = generateDate(- INTERVAR_OF_DAYS, 0);
@@ -21,8 +23,8 @@ export const generatePoint = () => {
             }
           ]
       },
-      id: 0,
-      isFavorite: false,
+      id: pointId.add(),
+      isFavorite: isFavorite(),
       offers: '$Array<Offer.id>$',
       type: TYPES[getRandomInteger(0, TYPES.length - 1)]
   }

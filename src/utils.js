@@ -20,5 +20,17 @@ const getRandomInteger = (a = 0, b = 1) => {
 
   const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
 
-  export {getRandomInteger, generateDate, getDate};
+  const isFavorite = () => getRandomInteger(0, 1);
+
+  class createId {
+    lastId = 0;
+  
+    add = () => {
+      this.lastId += 1;
+  
+      return this.lastId;
+    };
+  };
+
+  export {getRandomInteger, generateDate, getDate, isFavorite, createId};
   
