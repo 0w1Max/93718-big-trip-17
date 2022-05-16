@@ -1,3 +1,4 @@
+import {getDate} from '../utils.js';
 import {createElement} from '../render.js';
 
 const eventTypeListTemplate = () => (
@@ -53,7 +54,7 @@ const eventTypeListTemplate = () => (
   </div>`
 );
 
-const editHeaderPointTemplate = (type) => (
+const editHeaderPointTemplate = (type, dateFrom, dateTo) => (
   `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -78,10 +79,10 @@ const editHeaderPointTemplate = (type) => (
 
     <div class="event__field-group  event__field-group--time">
       <label class="visually-hidden" for="event-start-time-1">From</label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="18/03/19 12:25">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${getDate(dateFrom)}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">To</label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="18/03/19 13:35">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${getDate(dateTo)}">
     </div>
 
     <div class="event__field-group  event__field-group--price">
@@ -101,9 +102,9 @@ const editHeaderPointTemplate = (type) => (
 );
 
 const editPointTemplate = (point) => {
-  const {price, destination, type} = point;
+  const {price, destination, type, dateFrom, dateTo} = point;
 
-  const headerTemplate = editHeaderPointTemplate(type);
+  const headerTemplate = editHeaderPointTemplate(type, dateFrom, dateTo);
   
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">

@@ -19,8 +19,8 @@ const getRandomInteger = (a = 0, b = 1) => {
       .add(getRandomInteger(start, end), 'minute')
       .toDate();
 
-  const getDate = (currentDate, format) => dayjs(currentDate).format(DATE_FORMAT);
-  const getCurrentDate = (currentDate, format) => dayjs(currentDate).format(CURRENT_DATE_FORMAT);
+  const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
+  const getCurrentDate = (currentDate) => dayjs(currentDate).format(CURRENT_DATE_FORMAT);
 
   export {getRandomInteger, generateDate, getDate, getCurrentDate};
   
