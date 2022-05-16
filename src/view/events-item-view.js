@@ -1,23 +1,30 @@
-import {generateDate, getCurrentDate} from '../utils.js';
+import dayjs from 'dayjs';
+import {getRandomInteger, getDate} from '../utils.js';
 import {createElement} from '../render.js';
 
 const eventsItemTemplate = (point) => {
   const {price, destination, type, dateFrom} = point;
   
+  const date = dateFrom;
+  const eventDuration = getRandomInteger(15, 60);
+  const eventStartTime = getDate(date, 'hh:mm');
+  const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
+  
+  
   return `<li class="trip-events__item">
     <div class="event">
-        <time class="event__date" datetime="2019-03-18">${getCurrentDate(dateFrom)}</time>
+        <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
         <div class="event__type">
             <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
         </div>
-        <h3 class="event__title">Taxi ${destination.name}</h3>
+        <h3 class="event__title">${type} ${destination.name}</h3>
         <div class="event__schedule">
             <p class="event__time">
-                <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+                <time class="event__start-time" datetime="${getDate(date)}">${eventStartTime}</time>
                 &mdash;
-                <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
+                <time class="event__end-time" datetime="${getDate(date)}">${eventEndTime}</time>
             </p>
-            <p class="event__duration">30M</p>
+            <p class="event__duration">${eventDuration}M</p>
         </div>
         <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>

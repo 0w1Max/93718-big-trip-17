@@ -1,4 +1,4 @@
-import {generateDate} from '../utils.js';
+import {getRandomInteger, generateDate} from '../utils.js';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
@@ -8,22 +8,22 @@ export const generatePoint = () => {
   const dateTo = generateDate(0, INTERVAR_OF_DAYS);
 
   return {
-      price: 1100,
+      price: getRandomInteger(200, 5000),
       dateFrom: dateFrom,
       dateTo: dateTo,
       destination: {
-          description: DESCRIPTIONS[0],
-          name: CITIES[0],
+          description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+          name: CITIES[getRandomInteger(0, CITIES.length - 1)],
           pictures: [
             {
-              src: `${URL_PICTURES}1`,
-              description: DESCRIPTIONS[2]
+              src: `${URL_PICTURES}${getRandomInteger(1, 50)}`,
+              description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)]
             }
           ]
       },
       id: 0,
       isFavorite: false,
       offers: '$Array<Offer.id>$',
-      type: TYPES[0]
+      type: TYPES[getRandomInteger(0, TYPES.length - 1)]
   }
 };

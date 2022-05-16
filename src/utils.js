@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 
 const DATE_FORMAT = 'DD/MM/YY hh:mm';
-const CURRENT_DATE_FORMAT = 'MMM DD';
 
 // Функция из интернета по генерации случайного числа из диапазона
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
@@ -20,7 +19,6 @@ const getRandomInteger = (a = 0, b = 1) => {
       .toDate();
 
   const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
-  const getCurrentDate = (currentDate) => dayjs(currentDate).format(CURRENT_DATE_FORMAT);
 
-  export {getRandomInteger, generateDate, getDate, getCurrentDate};
+  export {getRandomInteger, generateDate, getDate};
   
