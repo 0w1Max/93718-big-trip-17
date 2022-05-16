@@ -1,13 +1,15 @@
 import {createElement} from '../render.js';
 
-const eventsItemTemplate = () => (
-  `<li class="trip-events__item">
+const eventsItemTemplate = (point) => {
+  const {price, destination, type} = point;
+  
+  return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="2019-03-18">MAR 18</time>
         <div class="event__type">
-            <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
+            <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
         </div>
-        <h3 class="event__title">Taxi Amsterdam</h3>
+        <h3 class="event__title">Taxi ${destination.name}</h3>
         <div class="event__schedule">
             <p class="event__time">
                 <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
@@ -16,13 +18,13 @@ const eventsItemTemplate = () => (
             </p>
             <p class="event__duration">30M</p>
         </div>
-        <p class="event__price">&euro;&nbsp;<span class="event__price-value">20</span></p>
+        <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
             <li class="event__offer">
                 <span class="event__offer-title">Order Uber</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">20</span>
+                <span class="event__offer-price">${price}</span>
             </li>
         </ul>
         <button class="event__favorite-btn event__favorite-btn--active" type="button">
@@ -36,11 +38,15 @@ const eventsItemTemplate = () => (
         </button>
     </div>
   </li>`
-);
+};
 
 export default class EventsItemView {
+  constructor (point) {
+    this.point = point;
+  }
+
   getTemplate () {
-    return eventsItemTemplate();
+    return eventsItemTemplate(this.point);
   }
 
   getElement () {
