@@ -17,3 +17,5 @@ const DESCRIPTIONS = [
 ];
 
 const URL_PICTURES = 'http://picsum.photos/248/152?r=';
+
+export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES};
