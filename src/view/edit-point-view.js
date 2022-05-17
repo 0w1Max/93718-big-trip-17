@@ -70,10 +70,10 @@ const editHeaderPointTemplate = (point, offer) => (
   </header>`
 );
 
-const offersListTemplate = (offer) => offer.offers.map((item) => (
+const offersListTemplate = (point, offer) => offer.offers.map((item) => (
   `<div class="event__offer-selector">
     <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" 
-    name="event-offer-luggage" ${isCheckedOffer()}>
+    name="event-offer-luggage" ${isCheckedOffer(point.offersArray, item.id)}>
     <label class="event__offer-label" for="event-offer-luggage-1">
       <span class="event__offer-title">${item.title}</span>
       &plus;&euro;&nbsp;
@@ -83,7 +83,7 @@ const offersListTemplate = (offer) => offer.offers.map((item) => (
 ));
 
 const editPointTemplate = (point, offer) => {
-  const {price, destination, type, dateFrom, dateTo} = point;
+  const {price, destination, type, dateFrom, dateTo, offersArray} = point;
   const {offerType, offers} = offer;
 
   const headerTemplate = editHeaderPointTemplate(point, offer);
@@ -96,7 +96,7 @@ const editPointTemplate = (point, offer) => {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${offersListTemplate(offer)}
+            ${offersListTemplate(point, offer)}
           </div>
         </section>
 

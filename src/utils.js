@@ -30,8 +30,8 @@ const getRandomInteger = (a = 0, b = 1) => {
       ? 'checked' 
       : '';
 
-  const isCheckedOffer = () => 
-    getRandomInteger(0, 1) === 1
+  const isCheckedOffer = (pointIdArray, offerId) => 
+    pointIdArray.includes(offerId)
       ? 'checked' 
       : '';
   

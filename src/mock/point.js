@@ -40,7 +40,7 @@ export const generatePoint = () => {
       },
       id: pointId.add(),
       isFavorite: getRandomInteger(0, 1),
-      offers: generateRandomOfferId(),
+      offersArray: generateRandomOfferId(),
       type: TYPES[getRandomInteger(0, TYPES.length - 1)]
   }
 };
