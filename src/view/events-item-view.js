@@ -42,10 +42,10 @@ const eventsItemTemplate = (point, offer) => {
         <ul class="event__selected-offers">
             <li class="event__offer">
                 <span class="event__offer-title">
-                Order ${offers.length !== 0 ? offers[getRandomInteger(0, offers.length - 1)].title : ''}</span>
+                Order ${offers.length !== 0 ? offers[getRandomInteger(0, offers.length - 1)].title : 'Empty'}</span>
                 &plus;&euro;&nbsp;
                 <span class="event__offer-price">
-                ${offers.length !== 0  ? offers[getRandomInteger(0, offers.length - 1)].priceOffer : ''}</span>
+                ${offers.length !== 0  ? offers[getRandomInteger(0, offers.length - 1)].priceOffer : 'Empty'}</span>
             </li>
         </ul>
         <button class="event__favorite-btn ${isFavoriteClass(isFavorite)}" type="button">

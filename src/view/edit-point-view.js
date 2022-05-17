@@ -107,7 +107,7 @@ const editPointTemplate = (point, offer) => {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${offersListTemplate(point, offer)}
+            ${offers.length !== 0 ? offersListTemplate(point, offer) : 'Empty'}
           </div>
         </section>
 
