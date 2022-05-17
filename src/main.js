@@ -5,9 +5,6 @@ import TripSortView from './view/trip-sort-view.js';
 import ListPresenter from './presenter/evenets-list-presenter.js';
 import PointModel from './model/point-model.js';
 import OfferModel from './model/offer-model.js';
-import { generateOffersType } from './mock/offer.js';
-
-console.log(generateOffersType());
 
 const tripMainElement = document.querySelector('.trip-main');
 const tripFiltersElement = document.querySelector('.trip-controls__filters');

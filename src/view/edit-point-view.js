@@ -1,68 +1,32 @@
 import {getDate} from '../utils.js';
 import {createElement} from '../render.js';
 
-const eventTypeListTemplate = () => (
+const eventTypeItem = (offer) => offer.offerType.map((type) => (
+  `<div class="event__type-item">
+    <input id="event-type-${type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
+    <label class="event__type-label  event__type-label--${type}" for="event-type-${type}-1">${type}</label>
+  </div>`
+)).join('');
+
+const eventTypeListTemplate = (offer) => (
   `<div class="event__type-list">
-  <fieldset class="event__type-group">
+    <fieldset class="event__type-group">
     <legend class="visually-hidden">Event type</legend>
 
-      <div class="event__type-item">
-        <input id="event-type-taxi-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
-        <label class="event__type-label  event__type-label--taxi" for="event-type-taxi-1">Taxi</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-bus-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="bus">
-        <label class="event__type-label  event__type-label--bus" for="event-type-bus-1">Bus</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-train-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="train">
-        <label class="event__type-label  event__type-label--train" for="event-type-train-1">Train</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-ship-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="ship">
-        <label class="event__type-label  event__type-label--ship" for="event-type-ship-1">Ship</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-drive-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="drive">
-        <label class="event__type-label  event__type-label--drive" for="event-type-drive-1">Drive</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-flight-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="flight" checked>
-        <label class="event__type-label  event__type-label--flight" for="event-type-flight-1">Flight</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-check-in-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="check-in">
-        <label class="event__type-label  event__type-label--check-in" for="event-type-check-in-1">Check-in</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-sightseeing-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="sightseeing">
-        <label class="event__type-label  event__type-label--sightseeing" for="event-type-sightseeing-1">Sightseeing</label>
-      </div>
-
-      <div class="event__type-item">
-        <input id="event-type-restaurant-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="restaurant">
-        <label class="event__type-label  event__type-label--restaurant" for="event-type-restaurant-1">Restaurant</label>
-      </div>
+    ${eventTypeItem(offer)}
     </fieldset>
   </div>`
 );
 
-const editHeaderPointTemplate = (type, dateFrom, dateTo) => (
+const editHeaderPointTemplate = (point, offer) => (
   `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
         <span class="visually-hidden">Choose event type</span>
-        <img class="event__type-icon" width="17" height="17" src="img/icons/${type}.png" alt="Event type icon">
+        <img class="event__type-icon" width="17" height="17" src="img/icons/${point.type}.png" alt="Event type icon">
       </label>
       <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
-      ${eventTypeListTemplate()}      
+      ${eventTypeListTemplate(offer)}      
     </div>
 
     <div class="event__field-group  event__field-group--destination">
@@ -79,10 +43,10 @@ const editHeaderPointTemplate = (type, dateFrom, dateTo) => (
 
     <div class="event__field-group  event__field-group--time">
       <label class="visually-hidden" for="event-start-time-1">From</label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${getDate(dateFrom)}">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${getDate(point.dateFrom)}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">To</label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${getDate(dateTo)}">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${getDate(point.dateTo)}">
     </div>
 
     <div class="event__field-group  event__field-group--price">
@@ -101,10 +65,11 @@ const editHeaderPointTemplate = (type, dateFrom, dateTo) => (
   </header>`
 );
 
-const editPointTemplate = (point) => {
+const editPointTemplate = (point, offer) => {
   const {price, destination, type, dateFrom, dateTo} = point;
+  const {offerType} = offer;
 
-  const headerTemplate = editHeaderPointTemplate(type, dateFrom, dateTo);
+  const headerTemplate = editHeaderPointTemplate(point, offer);
   
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -171,12 +136,13 @@ const editPointTemplate = (point) => {
 };
 
 export default class EditPointView {
-  constructor (point) {
+  constructor (point, offer) {
     this.point = point;
+    this.offer = offer;
   }
   
   getTemplate () {
-    return editPointTemplate(this.point);
+    return editPointTemplate(this.point, this.offer);
   }
 
   getElement () {
