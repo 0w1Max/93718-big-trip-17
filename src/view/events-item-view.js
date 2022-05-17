@@ -3,8 +3,19 @@ import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
 const eventsItemTemplate = (point, offer) => {
-  const {price, destination, type, dateFrom, isFavorite} = point;
-  const {offers, title} = offer;
+  const {
+    price = 0, 
+    destination = '', 
+    type = '', 
+    dateFrom = null, 
+    isFavorite = false
+  } = point;
+  
+  const {
+    offers = [], 
+    title = '', 
+    priceOffer = 0
+  } = offer;
   
   const date = dateFrom;
   const eventDuration = getRandomInteger(15, 60);
@@ -30,9 +41,11 @@ const eventsItemTemplate = (point, offer) => {
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
             <li class="event__offer">
-                <span class="event__offer-title">Order ${offers[getRandomInteger(0, offers.length - 1)].title}</span>
+                <span class="event__offer-title">
+                Order ${offers.length !== 0 ? offers[getRandomInteger(0, offers.length - 1)].title : ''}</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">${offers[getRandomInteger(0, offers.length - 1)].priceOffer}</span>
+                <span class="event__offer-price">
+                ${offers.length !== 0  ? offers[getRandomInteger(0, offers.length - 1)].priceOffer : ''}</span>
             </li>
         </ul>
         <button class="event__favorite-btn ${isFavoriteClass(isFavorite)}" type="button">

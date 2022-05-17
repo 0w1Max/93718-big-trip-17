@@ -83,8 +83,19 @@ const offersListTemplate = (point, offer) => offer.offers.map((item) => (
 ));
 
 const editPointTemplate = (point, offer) => {
-  const {price, destination, type, dateFrom, dateTo, offersArray} = point;
-  const {offerType, offers} = offer;
+  const {
+    price = 0, 
+    destination = '', 
+    type = '', 
+    dateFrom = null, 
+    dateTo = null, 
+    offersArray = []
+  } = point;
+
+  const {
+    offerType = '', 
+    offers = []
+  } = offer;
 
   const headerTemplate = editHeaderPointTemplate(point, offer);
   
