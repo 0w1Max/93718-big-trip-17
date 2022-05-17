@@ -46,5 +46,18 @@ const getRandomInteger = (a = 0, b = 1) => {
     };
   };
 
-  export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, isCheckedOffer, createId};
+  const createUniqueId = (min, max) => {
+    const idArray = [];
+    let id = getRandomInteger(min, max);
+    
+    while (idArray.includes(id)) {
+      id = getRandomInteger(min, max);
+    }
+
+    idArray.push(id);
+
+    return id;
+  }
+
+  export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, isCheckedOffer, createId, createUniqueId};
   
