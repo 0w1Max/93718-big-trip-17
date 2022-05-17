@@ -1,4 +1,4 @@
-import {getDate, isCheckedType} from '../utils.js';
+import {getDate, isCheckedType, isCheckedOffer} from '../utils.js';
 import {createElement} from '../render.js';
 import {TYPES, CITIES} from '../const.js';
 
@@ -58,7 +58,8 @@ const editHeaderPointTemplate = (point, offer) => (
         <span class="visually-hidden">Price</span>
         &euro;
       </label>
-      <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="160">
+      <input class="event__input  event__input--price" id="event-price-1" type="text" 
+      name="event-price" value="${point.price}">
     </div>
 
     <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
@@ -72,7 +73,7 @@ const editHeaderPointTemplate = (point, offer) => (
 const offersListTemplate = (offer) => offer.offers.map((item) => (
   `<div class="event__offer-selector">
     <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" 
-    name="event-offer-luggage">
+    name="event-offer-luggage" ${isCheckedOffer()}>
     <label class="event__offer-label" for="event-offer-luggage-1">
       <span class="event__offer-title">${item.title}</span>
       &plus;&euro;&nbsp;

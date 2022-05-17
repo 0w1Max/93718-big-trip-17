@@ -29,6 +29,11 @@ const getRandomInteger = (a = 0, b = 1) => {
     randomType === elementType
       ? 'checked' 
       : '';
+
+  const isCheckedOffer = () => 
+    getRandomInteger(0, 1) === 1
+      ? 'checked' 
+      : '';
   
 
   class createId {
@@ -41,5 +46,5 @@ const getRandomInteger = (a = 0, b = 1) => {
     };
   };
 
-  export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, createId};
+  export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, isCheckedOffer, createId};
   
