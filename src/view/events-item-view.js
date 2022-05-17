@@ -2,14 +2,14 @@ import dayjs from 'dayjs';
 import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
-const eventsItemTemplate = (point) => {
+const eventsItemTemplate = (point, offer) => {
   const {price, destination, type, dateFrom, isFavorite} = point;
+  const {offers, title} = offer;
   
   const date = dateFrom;
   const eventDuration = getRandomInteger(15, 60);
   const eventStartTime = getDate(date, 'hh:mm');
   const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
-  
   
   return `<li class="trip-events__item">
     <div class="event">
@@ -30,9 +30,9 @@ const eventsItemTemplate = (point) => {
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
             <li class="event__offer">
-                <span class="event__offer-title">Order Uber</span>
+                <span class="event__offer-title">Order ${offers[getRandomInteger(0, offers.length - 1)].title}</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">${price}</span>
+                <span class="event__offer-price">${offers[getRandomInteger(0, offers.length - 1)].priceOffer}</span>
             </li>
         </ul>
         <button class="event__favorite-btn ${isFavoriteClass(isFavorite)}" type="button">
@@ -49,12 +49,13 @@ const eventsItemTemplate = (point) => {
 };
 
 export default class EventsItemView {
-  constructor (point) {
+  constructor (point, offer) {
     this.point = point;
+    this.offer = offer;
   }
 
   getTemplate () {
-    return eventsItemTemplate(this.point);
+    return eventsItemTemplate(this.point, this.offer);
   }
 
   getElement () {

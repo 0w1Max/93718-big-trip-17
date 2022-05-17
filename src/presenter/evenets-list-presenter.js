@@ -14,14 +14,14 @@ export default class ListPresenter {
     this.offerModel = offerModel;
     this.points = [...this.pointModel.getPoints()];
     this.offers = this.offerModel.getOffers();
-    console.log(this.points);
-    console.log(this.offers);
+    // console.log(this.points);
+    // console.log(this.offers);
 
     render(this.listElement, this.container);
     render(new EditPointView(this.points[0], this.offers), this.listElement.getElement());
 
     for (let i = 1; i < this.points.length; i++) {
-      render(new EventsItemView(this.points[i]), this.listElement.getElement());
+      render(new EventsItemView(this.points[i], this.offers), this.listElement.getElement());
     }
   };
 }

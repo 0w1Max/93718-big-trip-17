@@ -16,7 +16,7 @@ const generateOffer = () => {
     return {
         id: offerId + 1,
         title: OFFERS[offerId],
-        price: getRandomInteger(5, 200)
+        priceOffer: getRandomInteger(5, 200)
     }
 };
 
