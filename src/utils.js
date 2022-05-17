@@ -20,9 +20,15 @@ const getRandomInteger = (a = 0, b = 1) => {
 
   const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
 
-  const isFavoriteClass = (isFavorite) => isFavorite
-    ? 'event__favorite-btn--active'
-    : '';
+  const isFavoriteClass = (isFavorite) => 
+    isFavorite
+      ? 'event__favorite-btn--active'
+      : '';
+
+  const isCheckedType = (randomType, elementType) => 
+    randomType === elementType
+      ? 'checked' 
+      : '';
   
 
   class createId {
@@ -35,5 +41,5 @@ const getRandomInteger = (a = 0, b = 1) => {
     };
   };
 
-  export {getRandomInteger, generateDate, getDate, isFavoriteClass, createId};
+  export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, createId};
   

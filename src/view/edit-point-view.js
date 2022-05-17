@@ -1,20 +1,21 @@
-import {getDate} from '../utils.js';
+import {getDate, isCheckedType} from '../utils.js';
 import {createElement} from '../render.js';
 import {TYPES, CITIES} from '../const.js';
 
-const eventTypeItemTemplate = () => TYPES.map((type) => (
+const eventTypeItemTemplate = (point) => TYPES.map((type) => (
   `<div class="event__type-item">
-    <input id="event-type-${type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
+    <input id="event-type-${type}-1" class="event__type-input  visually-hidden" type="radio" 
+    name="event-type" value="taxi" ${isCheckedType(point.type, type)}>
     <label class="event__type-label  event__type-label--${type}" for="event-type-${type}-1">${type}</label>
   </div>`
 )).join('');
 
-const eventTypeListTemplate = () => (
+const eventTypeListTemplate = (point) => (
   `<div class="event__type-list">
     <fieldset class="event__type-group">
     <legend class="visually-hidden">Event type</legend>
 
-    ${eventTypeItemTemplate()}
+    ${eventTypeItemTemplate(point)}
     </fieldset>
   </div>`
 );
@@ -30,7 +31,7 @@ const editHeaderPointTemplate = (point, offer) => (
         <img class="event__type-icon" width="17" height="17" src="img/icons/${point.type}.png" alt="Event type icon">
       </label>
       <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
-      ${eventTypeListTemplate(offer)}      
+      ${eventTypeListTemplate(point)}      
     </div>
 
     <div class="event__field-group  event__field-group--destination">
