@@ -12,12 +12,16 @@ export const generatePoint = () => {
   const generateRandomOfferId = () => {
     const offersIdArray = [];
 
-    let offerId = createUniqueId(1, OFFERS.length);
+    let offerId = getRandomInteger(1, OFFERS.length);
 
     for (let i = 0; i <= getRandomInteger(0, OFFERS.length); i++) {
-      offersIdArray.push(offerId);
+      if (offersIdArray.includes(offerId)) {
+        offerId = getRandomInteger(1, OFFERS.length);  
+      } else {
+        offersIdArray.push(offerId);
+      }
 
-      offerId = createUniqueId(1, OFFERS.length);
+      offerId = getRandomInteger(1, OFFERS.length);
     }
 
     return offersIdArray;

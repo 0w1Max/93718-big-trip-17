@@ -1,16 +1,16 @@
-import {getRandomInteger, createUniqueId} from '../utils.js';
+import {getRandomInteger} from '../utils.js';
 import {TYPES, OFFERS} from '../const.js';
 
-const offersIdArray= [];
+const offerIdArray = [];
 
 const generateOffer = () => {
-  let offerId = createUniqueId(0, OFFERS.length - 1);
+  let offerId = getRandomInteger(0, OFFERS.length - 1);
 
-  while (offersIdArray.includes(offerId)) {
-    offerId = createUniqueId(0, OFFERS.length - 1);
+  if (offerIdArray.includes(offerId)) {
+    offerId = getRandomInteger(0, OFFERS.length - 1)  
+  } else {
+    offerIdArray.push(offerId);
   }
-
-  offersIdArray.push(offerId);
 
   return {
     id: offerId + 1,
@@ -26,4 +26,4 @@ const generateOffersType = () => ({
   offers: offers
 });
 
-export {generateOffer, generateOffersType, offersIdArray};
+export {generateOffer, generateOffersType};

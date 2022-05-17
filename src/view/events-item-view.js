@@ -20,6 +20,14 @@ const eventsItemTemplate = (point, offer) => {
   const eventStartTime = getDate(date, 'hh:mm');
   const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
 
+  const getTitleOffer = () => offers.length !== 0
+    ? offers[getRandomInteger(0, offers.length - 1)].title
+    : 'No offers';
+
+  const getPriceOffer = () => offers.length !== 0
+    ? offers[getRandomInteger(0, offers.length - 1)].priceOffer
+    : 'No offers';
+
   return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
@@ -39,11 +47,9 @@ const eventsItemTemplate = (point, offer) => {
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
             <li class="event__offer">
-                <span class="event__offer-title">
-                Order ${offers.length !== 0 ? offers[getRandomInteger(0, offers.length - 1)].title : 'Empty'}</span>
+                <span class="event__offer-title">Order ${getTitleOffer()}</span>
                 &plus;&euro;&nbsp;
-                <span class="event__offer-price">
-                ${offers.length !== 0  ? offers[getRandomInteger(0, offers.length - 1)].priceOffer : 'Empty'}</span>
+                <span class="event__offer-price">${getPriceOffer()}</span>
             </li>
         </ul>
         <button class="event__favorite-btn ${isFavoriteClass(isFavorite)}" type="button">
