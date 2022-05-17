@@ -133,7 +133,9 @@ export default class EditPointView {
       return this.element;
     }
 
-    return (this.element = createElement(this.getTemplate()));
+    this.element = createElement(this.getTemplate())
+    
+    return this.element;
   }
 
   removeElement () {
