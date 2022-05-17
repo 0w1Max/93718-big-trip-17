@@ -23,7 +23,7 @@ const eventTypeListTemplate = (point) => (
 const destinationListTemplate = () => CITIES.map((city) =>  
   `<option value="${city}"></option>`).join('');
 
-const editHeaderPointTemplate = (point, offer) => (
+const editHeaderPointTemplate = (point) => (
   `<header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -80,20 +80,14 @@ const offersListTemplate = (point, offer) => offer.offers.map((item) => (
       <span class="event__offer-price">${item.price}</span>
     </label>
   </div>`
-));
+)).join('');
 
 const editPointTemplate = (point, offer) => {
-  const {
-    price = 0, 
-    destination = '', 
-    type = '', 
-    dateFrom = null, 
-    dateTo = null, 
-    offersArray = []
+  const { 
+    destination = ''
   } = point;
 
   const {
-    offerType = '', 
     offers = []
   } = offer;
 

@@ -12,9 +12,7 @@ const eventsItemTemplate = (point, offer) => {
   } = point;
   
   const {
-    offers = [], 
-    title = '', 
-    priceOffer = 0
+    offers = []
   } = offer;
   
   const date = dateFrom;
