@@ -12,7 +12,7 @@ const generateOffer = () => ({
 const offers = Array.from({length: getRandomInteger(0, 3)}, generateOffer);
 
 const generateOffersType = () => ({
-    offerType: TYPES,
+    offerType: TYPES[getRandomInteger(0, TYPES.length - 1)],
     offers: offers
 });
 

@@ -1,22 +1,26 @@
 import {getDate} from '../utils.js';
 import {createElement} from '../render.js';
+import {TYPES, CITIES} from '../const.js';
 
-const eventTypeItem = (offer) => offer.offerType.map((type) => (
+const eventTypeItemTemplate = () => TYPES.map((type) => (
   `<div class="event__type-item">
     <input id="event-type-${type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
     <label class="event__type-label  event__type-label--${type}" for="event-type-${type}-1">${type}</label>
   </div>`
 )).join('');
 
-const eventTypeListTemplate = (offer) => (
+const eventTypeListTemplate = () => (
   `<div class="event__type-list">
     <fieldset class="event__type-group">
     <legend class="visually-hidden">Event type</legend>
 
-    ${eventTypeItem(offer)}
+    ${eventTypeItemTemplate()}
     </fieldset>
   </div>`
 );
+
+const destinationListTemplate = () => CITIES.map((city) =>  
+  `<option value="${city}"></option>`).join('');
 
 const editHeaderPointTemplate = (point, offer) => (
   `<header class="event__header">
@@ -35,9 +39,7 @@ const editHeaderPointTemplate = (point, offer) => (
       </label>
       <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="Chamonix" list="destination-list-1">
       <datalist id="destination-list-1">
-        <option value="Amsterdam"></option>
-        <option value="Geneva"></option>
-        <option value="Chamonix"></option>
+        ${destinationListTemplate()}
       </datalist>
     </div>
 
