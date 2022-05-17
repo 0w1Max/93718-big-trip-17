@@ -16,7 +16,7 @@ const generateOffer = () => {
     id: offerId + 1,
     title: OFFERS[offerId],
     priceOffer: getRandomInteger(5, 200)
-  }
+  };
 };
 
 const offers = Array.from({length: getRandomInteger(0, OFFERS.length)}, generateOffer);

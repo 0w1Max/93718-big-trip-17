@@ -20,7 +20,7 @@ const eventTypeListTemplate = (point) => (
   </div>`
 );
 
-const destinationListTemplate = () => CITIES.map((city) =>  
+const destinationListTemplate = () => CITIES.map((city) =>
   `<option value="${city}"></option>`).join('');
 
 const editHeaderPointTemplate = (point) => (
@@ -83,7 +83,7 @@ const offersListTemplate = (point, offer) => offer.offers.map((item) => (
 )).join('');
 
 const editPointTemplate = (point, offer) => {
-  const { 
+  const {
     destination = ''
   } = point;
 
@@ -92,7 +92,7 @@ const editPointTemplate = (point, offer) => {
   } = offer;
 
   const headerTemplate = editHeaderPointTemplate(point, offer);
-  
+
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       ${headerTemplate}
@@ -111,7 +111,7 @@ const editPointTemplate = (point, offer) => {
         </section>
       </section>
     </form>
-  </li>`
+  </li>`;
 };
 
 export default class EditPointView {
@@ -119,7 +119,7 @@ export default class EditPointView {
     this.point = point;
     this.offer = offer;
   }
-  
+
   getTemplate () {
     return editPointTemplate(this.point, this.offer);
   }

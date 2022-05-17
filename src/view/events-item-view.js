@@ -4,22 +4,22 @@ import {createElement} from '../render.js';
 
 const eventsItemTemplate = (point, offer) => {
   const {
-    price = 0, 
-    destination = '', 
-    type = '', 
-    dateFrom = null, 
+    price = 0,
+    destination = '',
+    type = '',
+    dateFrom = null,
     isFavorite = false
   } = point;
-  
+
   const {
     offers = []
   } = offer;
-  
+
   const date = dateFrom;
   const eventDuration = getRandomInteger(15, 60);
   const eventStartTime = getDate(date, 'hh:mm');
   const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
-  
+
   return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
@@ -56,7 +56,7 @@ const eventsItemTemplate = (point, offer) => {
             <span class="visually-hidden">Open event</span>
         </button>
     </div>
-  </li>`
+  </li>`;
 };
 
 export default class EventsItemView {

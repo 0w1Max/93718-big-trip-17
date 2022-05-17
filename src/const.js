@@ -29,6 +29,6 @@ const OFFERS = [
   'Offer 8',
   'Offer 9',
   'Offer 10'
-]
+];
 
 export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, OFFERS};
