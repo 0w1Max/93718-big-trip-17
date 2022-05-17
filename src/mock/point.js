@@ -1,4 +1,4 @@
-import {getRandomInteger, generateDate, createId, createUniqueId} from '../utils.js';
+import {getRandomInteger, generateDate, createId} from '../utils.js';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, OFFERS} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
@@ -16,7 +16,7 @@ export const generatePoint = () => {
 
     for (let i = 0; i <= getRandomInteger(0, OFFERS.length); i++) {
       if (offersIdArray.includes(offerId)) {
-        offerId = getRandomInteger(1, OFFERS.length);  
+        offerId = getRandomInteger(1, OFFERS.length);
       } else {
         offersIdArray.push(offerId);
       }

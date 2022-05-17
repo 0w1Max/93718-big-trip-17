@@ -7,7 +7,7 @@ const generateOffer = () => {
   let offerId = getRandomInteger(0, OFFERS.length - 1);
 
   if (offerIdArray.includes(offerId)) {
-    offerId = getRandomInteger(0, OFFERS.length - 1)  
+    offerId = getRandomInteger(0, OFFERS.length - 1);
   } else {
     offerIdArray.push(offerId);
   }
