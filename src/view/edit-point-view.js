@@ -77,7 +77,7 @@ const offersListTemplate = (point, offer) => offer.offers.map((item) => (
     <label class="event__offer-label" for="event-offer-luggage-1">
       <span class="event__offer-title">${item.title}</span>
       &plus;&euro;&nbsp;
-      <span class="event__offer-price">${item.price}</span>
+      <span class="event__offer-price">${item.priceOffer}</span>
     </label>
   </div>`
 )).join('');
