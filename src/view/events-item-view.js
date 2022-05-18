@@ -12,6 +12,7 @@ const eventsItemTemplate = (point, offer) => {
   } = point;
 
   const {
+    offerType = '',
     offers = []
   } = offer;
 
@@ -25,7 +26,7 @@ const eventsItemTemplate = (point, offer) => {
     : 'No offers';
 
   const getPriceOffer = () => offers.length !== 0
-    ? offers[getRandomInteger(0, offers.length - 1)].priceOffer
+    ? offers[getRandomInteger(0, offers.length - 1)].price
     : 'No offers';
 
   return `<li class="trip-events__item">

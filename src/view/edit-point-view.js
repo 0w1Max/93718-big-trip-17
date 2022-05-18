@@ -70,17 +70,23 @@ const editHeaderPointTemplate = (point) => (
   </header>`
 );
 
-const offersListTemplate = (point, offer) => offer.offers.map((item) => (
-  `<div class="event__offer-selector">
-    <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" 
-    name="event-offer-luggage" ${isCheckedOffer(point.offersArray, item.id)}>
-    <label class="event__offer-label" for="event-offer-luggage-1">
-      <span class="event__offer-title">${item.title}</span>
-      &plus;&euro;&nbsp;
-      <span class="event__offer-price">${item.priceOffer}</span>
-    </label>
-  </div>`
-)).join('');
+const offersListTemplate = (point, offer) => offer.map((offers) => {
+  return offers.offers.map((item) => {
+    if (point.type === offers.type) {
+      return `<div class="event__offer-selector">
+          <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" 
+          name="event-offer-luggage" ${isCheckedOffer(point.offersArray, item.id)}>
+          <label class="event__offer-label" for="event-offer-luggage-1">
+            <span class="event__offer-title">${item.title}</span>
+            &plus;&euro;&nbsp;
+            <span class="event__offer-price">${item.price}</span>
+          </label>
+        </div>`
+    } else {
+      return '';
+    }
+  }).join('');
+}).join('');
 
 const editPointTemplate = (point, offer) => {
   const {
@@ -105,7 +111,7 @@ const editPointTemplate = (point, offer) => {
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
           <div class="event__available-offers">
-            ${getOffers()}
+            ${offersListTemplate(point, offer)}
           </div>
         </section>
 

@@ -10,17 +10,17 @@ export const generateOffers = () => {
       offers: [
         {
           id: id.add(),
-          title: `Offer ${id.show()}`,
+          title: `Offer ${type} ${id.show()}`,
           price: getRandomInteger(5, 200)
         },
         {
           id: id.add(),
-          title: `Offer ${id.show()}`,
+          title: `Offer ${type} ${id.show()}`,
           price: getRandomInteger(5, 200)
         },
         {
           id: id.add(),
-          title: `Offer ${id.show()}`,
+          title: `Offer ${type} ${id.show()}`,
           price: getRandomInteger(5, 200)
         }
       ]
