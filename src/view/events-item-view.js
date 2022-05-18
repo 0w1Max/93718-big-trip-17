@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
-const selectedOffersTemplate = (point, offer) => offer.map((offers) => {
-  return offers.offers.map((item) => {
-    return point.offersArray.map((id) => {
+const selectedOffersTemplate = (point, offer) => offer.map((offers) =>
+  offers.offers.map((item) =>
+    point.offersArray.map((id) => {
       if (id === item.id && point.type === offers.type) {
         return `<li class="event__offer">
           <span class="event__offer-title">Order ${item.title}</span>
@@ -12,9 +12,9 @@ const selectedOffersTemplate = (point, offer) => offer.map((offers) => {
           <span class="event__offer-price">${item.price}</span>
         </li>`;
       }
-    }).join('');
-  }).join('');
-}).join('');
+    }).join('')
+  ).join('')
+).join('');
 
 const eventsItemTemplate = (point, offer) => {
   const {
@@ -25,10 +25,10 @@ const eventsItemTemplate = (point, offer) => {
     isFavorite = false
   } = point;
 
-  const {
-    offerType = '',
-    offers = []
-  } = offer;
+  // const {
+  //   offerType = '',
+  //   offers = []
+  // } = offer;
 
   const date = dateFrom;
   const eventDuration = getRandomInteger(15, 60);

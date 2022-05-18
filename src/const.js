@@ -18,17 +18,4 @@ const DESCRIPTIONS = [
 
 const URL_PICTURES = 'http://picsum.photos/248/152?r=';
 
-const OFFERS = [
-  'Offer 1',
-  'Offer 2',
-  'Offer 3',
-  'Offer 4',
-  'Offer 5',
-  'Offer 6',
-  'Offer 7',
-  'Offer 8',
-  'Offer 9',
-  'Offer 10'
-];
-
-export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, OFFERS};
+export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES};

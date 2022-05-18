@@ -44,9 +44,7 @@ class createId {
     return this.lastId;
   };
 
-  show = () => {
-    return this.lastId;
-  }
+  show = () => this.lastId;
 }
 
 export {

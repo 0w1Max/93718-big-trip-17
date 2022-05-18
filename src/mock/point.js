@@ -1,5 +1,5 @@
 import {getRandomInteger, generateDate, createId} from '../utils.js';
-import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, OFFERS} from '../const.js';
+import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
 

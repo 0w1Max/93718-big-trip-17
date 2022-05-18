@@ -70,8 +70,8 @@ const editHeaderPointTemplate = (point) => (
   </header>`
 );
 
-const offersListTemplate = (point, offer) => offer.map((offers) => {
-  return offers.offers.map((item) => {
+const offersListTemplate = (point, offer) => offer.map((offers) =>
+  offers.offers.map((item) => {
     if (point.type === offers.type) {
       return `<div class="event__offer-selector">
           <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" 
@@ -81,21 +81,21 @@ const offersListTemplate = (point, offer) => offer.map((offers) => {
             &plus;&euro;&nbsp;
             <span class="event__offer-price">${item.price}</span>
           </label>
-        </div>`
+        </div>`;
     } else {
       return '';
     }
-  }).join('');
-}).join('');
+  }).join('')
+).join('');
 
 const editPointTemplate = (point, offer) => {
   const {
     destination = ''
   } = point;
 
-  const {
-    offers = []
-  } = offer;
+  // const {
+  //   offers = []
+  // } = offer;
 
   const headerTemplate = editHeaderPointTemplate(point, offer);
 
