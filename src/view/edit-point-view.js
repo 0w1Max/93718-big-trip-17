@@ -99,10 +99,6 @@ const editPointTemplate = (point, offer) => {
 
   const headerTemplate = editHeaderPointTemplate(point, offer);
 
-  const getOffers = () => offers.length !== 0
-    ? offersListTemplate(point, offer)
-    : 'No offers';
-
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       ${headerTemplate}

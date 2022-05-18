@@ -2,6 +2,20 @@ import dayjs from 'dayjs';
 import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
+const selectedOffersTemplate = (point, offer) => offer.map((offers) => {
+  return offers.offers.map((item) => {
+    return point.offersArray.map((id) => {
+      if (id === item.id && point.type === offers.type) {
+        return `<li class="event__offer">
+          <span class="event__offer-title">Order ${item.title}</span>
+          &plus;&euro;&nbsp;
+          <span class="event__offer-price">${item.price}</span>
+        </li>`;
+      }
+    }).join('');
+  }).join('');
+}).join('');
+
 const eventsItemTemplate = (point, offer) => {
   const {
     price = 0,
@@ -21,14 +35,6 @@ const eventsItemTemplate = (point, offer) => {
   const eventStartTime = getDate(date, 'hh:mm');
   const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
 
-  const getTitleOffer = () => offers.length !== 0
-    ? offers[getRandomInteger(0, offers.length - 1)].title
-    : 'No offers';
-
-  const getPriceOffer = () => offers.length !== 0
-    ? offers[getRandomInteger(0, offers.length - 1)].price
-    : 'No offers';
-
   return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
@@ -47,11 +53,7 @@ const eventsItemTemplate = (point, offer) => {
         <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
-            <li class="event__offer">
-                <span class="event__offer-title">Order ${getTitleOffer()}</span>
-                &plus;&euro;&nbsp;
-                <span class="event__offer-price">${getPriceOffer()}</span>
-            </li>
+          ${selectedOffersTemplate(point, offer) || 'No offers'}
         </ul>
         <button class="event__favorite-btn ${isFavoriteClass(isFavorite)}" type="button">
             <span class="visually-hidden">Add to favorite</span>

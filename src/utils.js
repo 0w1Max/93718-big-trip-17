@@ -35,7 +35,6 @@ const isCheckedOffer = (pointIdArray, offerId) =>
     ? 'checked'
     : '';
 
-
 class createId {
   lastId = 0;
 
@@ -50,4 +49,12 @@ class createId {
   }
 }
 
-export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, isCheckedOffer, createId};
+export {
+  getRandomInteger,
+  generateDate,
+  getDate,
+  isFavoriteClass,
+  isCheckedType,
+  isCheckedOffer,
+  createId
+};
