@@ -10,21 +10,18 @@ export const generatePoint = () => {
   const dateTo = generateDate(0, INTERVAR_OF_DAYS);
 
   const generateRandomOfferId = () => {
-    const offersIdArray = [];
+    const offersIdArray = new Set();
+    let offerId = getRandomInteger(0, 3);
 
-    let offerId = getRandomInteger(1, OFFERS.length);
+    for (let i = 0; i <= offerId; i++) {
+      if (offerId !== 0) {
+        offersIdArray.add(offerId);
 
-    for (let i = 0; i <= getRandomInteger(0, OFFERS.length); i++) {
-      if (offersIdArray.includes(offerId)) {
-        offerId = getRandomInteger(1, OFFERS.length);
-      } else {
-        offersIdArray.push(offerId);
+        offerId = getRandomInteger(0, 3);
       }
-
-      offerId = getRandomInteger(1, OFFERS.length);
     }
 
-    return offersIdArray;
+    return Array.from(offersIdArray);
   };
 
   return {

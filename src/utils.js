@@ -44,6 +44,10 @@ class createId {
 
     return this.lastId;
   };
+
+  show = () => {
+    return this.lastId;
+  }
 }
 
 export {getRandomInteger, generateDate, getDate, isFavoriteClass, isCheckedType, isCheckedOffer, createId};
