@@ -2,8 +2,8 @@ import {getRandomInteger} from '../utils.js';
 import {TYPES} from '../const.js';
 
 export const generateOffers = () => {
-  const offers = TYPES.map((type) => {
-    return {
+  const offers = TYPES.map((type) => (
+    {
       type,
       offers: [
         {
@@ -22,8 +22,8 @@ export const generateOffers = () => {
           price: getRandomInteger(5, 200)
         }
       ]
-    };
-  });
+    }
+  ));
 
   return offers;
 };
