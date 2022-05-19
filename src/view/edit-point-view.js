@@ -93,10 +93,6 @@ const editPointTemplate = (point, offer) => {
     destination = ''
   } = point;
 
-  // const {
-  //   offers = []
-  // } = offer;
-
   const headerTemplate = editHeaderPointTemplate(point, offer);
 
   return `<li class="trip-events__item">

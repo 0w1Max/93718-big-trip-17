@@ -25,11 +25,6 @@ const eventsItemTemplate = (point, offer) => {
     isFavorite = false
   } = point;
 
-  // const {
-  //   offerType = '',
-  //   offers = []
-  // } = offer;
-
   const date = dateFrom;
   const eventDuration = getRandomInteger(15, 60);
   const eventStartTime = getDate(date, 'hh:mm');
