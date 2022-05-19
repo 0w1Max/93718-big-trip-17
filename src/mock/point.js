@@ -7,17 +7,17 @@ export const generatePoint = () => {
   const dateFrom = generateDate(- INTERVAR_OF_DAYS, 0);
   const dateTo = generateDate(0, INTERVAR_OF_DAYS);
 
-  const generateRandomOfferId = () => {
-    const offersIdArray = new Set;
+  const generateOffersIdArray = () => {
+    const offersIdArray = [];
     let randomId = getRandomInteger(1, 5);
 
     for (let i = 0; i <= getRandomInteger(0, 3); i++) {
-      offersIdArray.add(randomId);
+      offersIdArray.push(randomId);
 
       randomId = getRandomInteger(1, 5);
     }
 
-    return Array.from(offersIdArray);
+    return offersIdArray;
   };
 
   return {
@@ -34,9 +34,9 @@ export const generatePoint = () => {
         }
       ]
     },
-    id: generateRandomOfferId(),
+    id: getRandomInteger(0, 20),
     isFavorite: getRandomInteger(0, 1),
-    offersArray: generateRandomOfferId(),
+    offersArray: generateOffersIdArray(),
     type: TYPES[getRandomInteger(0, TYPES.length - 1)]
   };
 };
