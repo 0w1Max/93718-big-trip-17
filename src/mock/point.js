@@ -34,7 +34,7 @@ export const generatePoint = () => {
         }
       ]
     },
-    id: getRandomInteger(0, 20),
+    id: getRandomInteger(1, 20),
     isFavorite: getRandomInteger(0, 1),
     offersArray: generateOffersIdArray(),
     type: TYPES[getRandomInteger(0, TYPES.length - 1)]
