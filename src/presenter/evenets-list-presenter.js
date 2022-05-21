@@ -24,10 +24,52 @@ export default class ListPresenter {
     // console.log(this.#offers);
 
     render(this.#eventListComponent, this.#container);
-    render(new EditPointView(this.#points[0], this.#offers), this.#eventListComponent.element);
 
-    for (let i = 1; i < this.#points.length; i++) {
-      render(new EventsItemView(this.#points[i], this.#offers), this.#eventListComponent.element);
+    for (let i = 0; i < this.#points.length; i++) {
+      this.#renderPoint(this.#points[i], this.#offers);
     }
+  };
+
+  #renderPoint = (point, offer) => {
+    const pointComponent = new EventsItemView(point, offer);
+    const editPointComponent = new EditPointView(point, offer);
+
+    const replacePointToForm = () => {
+      this.#eventListComponent.element.replaceChild(editPointComponent.element, pointComponent.element);
+    };
+
+    const replaceFormToPoint = () => {
+      this.#eventListComponent.element.replaceChild(pointComponent.element, editPointComponent.element);
+    };
+
+    const onEscKeyDown = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        replaceFormToPoint();
+
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
+    };
+
+    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replacePointToForm();
+
+      document.addEventListener('keydown', onEscKeyDown);
+    });
+
+    editPointComponent.element.querySelector('form').addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      replaceFormToPoint();
+
+      document.removeEventListener('keydown', onEscKeyDown);
+    });
+
+    editPointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replaceFormToPoint();
+      
+      document.removeEventListener('keydown', onEscKeyDown);
+    });
+
+    render(pointComponent, this.#eventListComponent.element);
   };
 }
