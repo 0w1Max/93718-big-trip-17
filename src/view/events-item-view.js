@@ -22,13 +22,14 @@ const eventsItemTemplate = (point, offer) => {
     destination = '',
     type = '',
     dateFrom = null,
+    dateTo = null,
     isFavorite = false
   } = point;
 
   const date = dateFrom;
-  const eventDuration = getRandomInteger(15, 60);
   const eventStartTime = getDate(date, 'hh:mm');
-  const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
+  const eventEndTime = getDate(dateTo, 'hh:mm');
+  const eventDuration = dayjs(dateTo).diff(dayjs(date), 'minute');
 
   return `<li class="trip-events__item">
     <div class="event">
