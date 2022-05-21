@@ -4,20 +4,30 @@ import EventsItemView from '../view/events-item-view.js';
 import EditPointView from '../view/edit-point-view.js';
 
 export default class ListPresenter {
-  listElement = new EventsListView();
+  #container = null;
+  #pointModel = null;
+  #offerModel = null;
+
+  #eventListComponent = new EventsListView();
+
+  #points = [];
+  #offers = [];
 
   init = (container, pointModel, offerModel) => {
-    this.container = container;
-    this.pointModel = pointModel;
-    this.offerModel = offerModel;
-    this.points = [...this.pointModel.getPoints()];
-    this.offers = this.offerModel.getOffers();
+    this.#container = container;
+    this.#pointModel = pointModel;
+    this.#offerModel = offerModel;
+    this.#points = [...this.#pointModel.points];
+    this.#offers = [...this.#offerModel.offers];
 
-    render(this.listElement, this.container);
-    render(new EditPointView(this.points[0], this.offers), this.listElement.getElement());
+    // console.log(this.#points);
+    // console.log(this.#offers);
 
-    for (let i = 1; i < this.points.length; i++) {
-      render(new EventsItemView(this.points[i], this.offers), this.listElement.getElement());
+    render(this.#eventListComponent, this.#container);
+    render(new EditPointView(this.#points[0], this.#offers), this.#eventListComponent.element);
+
+    for (let i = 1; i < this.#points.length; i++) {
+      render(new EventsItemView(this.#points[i], this.#offers), this.#eventListComponent.element);
     }
   };
 }

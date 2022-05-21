@@ -26,19 +26,21 @@ const tripSortTemplate = () => (
 );
 
 export default class TripSortView {
-  getTemplate () {
+  #element = null;
+
+  get template () {
     return tripSortTemplate();
   }
 
-  getElement () {
-    if (this.element) {
-      return this.element;
+  get element () {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return (this.element = createElement(this.getTemplate()));
+    return this.#element;
   }
 
   removeElement () {
-    this.element = null;
+    this.#element = null;
   }
 }
