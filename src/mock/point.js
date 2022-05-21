@@ -8,16 +8,16 @@ export const generatePoint = () => {
   const dateTo = generateDate(0, INTERVAR_OF_DAYS);
 
   const generateOffersIdArray = () => {
-    const offersIdArray = [];
+    const offersIdArray = new Set;
     let randomId = getRandomInteger(1, 5);
 
-    for (let i = 0; i <= getRandomInteger(0, 3); i++) {
-      offersIdArray.push(randomId);
+    for (let i = 0; i <= getRandomInteger(0, 5); i++) {
+      offersIdArray.add(randomId);
 
       randomId = getRandomInteger(1, 5);
     }
 
-    return offersIdArray;
+    return Array.from(offersIdArray);
   };
 
   return {
