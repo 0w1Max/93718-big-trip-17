@@ -18,4 +18,8 @@ const DESCRIPTIONS = [
 
 const URL_PICTURES = 'http://picsum.photos/248/152?r=';
 
-export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES};
+// Максимальный id, который может быть у оффера
+const OFFERS_COUNT = 3;
+const ID_COUNT = TYPES.length * OFFERS_COUNT;
+
+export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT};

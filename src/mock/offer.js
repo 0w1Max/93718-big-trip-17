@@ -1,31 +1,31 @@
-import {getRandomInteger} from '../utils.js';
+import {getRandomInteger, RandomIdSet} from '../utils.js';
 import {TYPES} from '../const.js';
 
 export const generateOffers = () => {
-  const offers = TYPES.map((type) => {
-    let id = 1;
+  const id = new RandomIdSet();
 
-    return {
+  const offers = TYPES.map((type) => (
+    {
       type,
       offers: [
         {
-          id: id++,
+          id: id.getId(),
           title: `Offer ${type}`,
           price: getRandomInteger(5, 200)
         },
         {
-          id: id++,
+          id: id.getId(),
           title: `Offer ${type}`,
           price: getRandomInteger(5, 200)
         },
         {
-          id: id++,
+          id: id.getId(),
           title: `Offer ${type}`,
           price: getRandomInteger(5, 200)
         }
       ]
-    };
-  });
+    }
+  ));
 
   return offers;
 };
