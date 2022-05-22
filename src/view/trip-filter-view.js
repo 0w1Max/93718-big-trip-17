@@ -22,19 +22,21 @@ const tripFilterTemplate = () => (
 );
 
 export default class TripFilterView {
-  getTemplate () {
+  #element = null;
+
+  get template () {
     return tripFilterTemplate();
   }
 
-  getElement () {
-    if (this.element) {
-      return this.element;
+  get element () {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return (this.element = createElement(this.getTemplate()));
+    return this.#element;
   }
 
   removeElement () {
-    this.element = null;
+    this.#element = null;
   }
 }

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
+import {getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
 const selectedOffersTemplate = (point, offer) => offer.map((offers) =>
@@ -22,14 +22,28 @@ const eventsItemTemplate = (point, offer) => {
     destination = '',
     type = '',
     dateFrom = null,
+    dateTo = null,
     isFavorite = false
   } = point;
 
   const date = dateFrom;
-  const eventDuration = getRandomInteger(15, 60);
   const eventStartTime = getDate(date, 'hh:mm');
-  const eventEndTime = dayjs(date).add(eventDuration, 'minute').format('hh:mm');
+  const eventEndTime = getDate(dateTo, 'hh:mm');
+  const eventDuration = dayjs(dateTo).diff(dayjs(date), 'day', true);
+  const days = Math.floor(eventDuration);
+  const hours = Math.floor((eventDuration - days) * 24);
+  const minutes = Math.round(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
 
+  const showEventDuration = () => {
+    if (days !== 0 && hours !== 0) {
+      return `0${days}D 0${hours}H ${minutes}M`;
+    } else if (hours !== 0) {
+      return `0${hours}H ${minutes}M`;
+    } else {
+      return `${minutes}M`;
+    }
+
+  };
   return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
@@ -43,7 +57,7 @@ const eventsItemTemplate = (point, offer) => {
                 &mdash;
                 <time class="event__end-time" datetime="${getDate(date)}">${eventEndTime}</time>
             </p>
-            <p class="event__duration">${eventDuration}M</p>
+            <p class="event__duration">${showEventDuration()}</p>
         </div>
         <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>
@@ -64,26 +78,28 @@ const eventsItemTemplate = (point, offer) => {
 };
 
 export default class EventsItemView {
+  #element = null;
+  #point = null;
+  #offer = null;
+
   constructor (point, offer) {
-    this.point = point;
-    this.offer = offer;
+    this.#point = point;
+    this.#offer = offer;
   }
 
-  getTemplate () {
-    return eventsItemTemplate(this.point, this.offer);
+  get template () {
+    return eventsItemTemplate(this.#point, this.#offer);
   }
 
-  getElement () {
-    if (this.element) {
-      return this.element;
+  get element () {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    this.element = createElement(this.getTemplate());
-
-    return this.element;
+    return this.#element;
   }
 
   removeElement () {
-    this.element = null;
+    this.#element = null;
   }
 }
