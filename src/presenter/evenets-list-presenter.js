@@ -66,7 +66,7 @@ export default class ListPresenter {
 
     editPointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
       replaceFormToPoint();
-      
+
       document.removeEventListener('keydown', onEscKeyDown);
     });
 

@@ -24,7 +24,7 @@ export const generateOffers = () => {
           price: getRandomInteger(5, 200)
         }
       ]
-    }
+    };
   });
 
   return offers;

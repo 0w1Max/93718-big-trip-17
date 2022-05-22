@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {getRandomInteger, getDate, isFavoriteClass} from '../utils.js';
+import {getDate, isFavoriteClass} from '../utils.js';
 import {createElement} from '../render.js';
 
 const selectedOffersTemplate = (point, offer) => offer.map((offers) =>
