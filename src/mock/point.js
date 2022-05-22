@@ -15,7 +15,7 @@ export const generatePoint = () => {
     const offersIdArray = new Set;
 
     for (let i = 0; i <= getRandomInteger(0, 30); i++) {
-      let randomId = getRandomInteger(1, ID_COUNT);
+      const randomId = getRandomInteger(1, ID_COUNT);
 
       offersIdArray.add(randomId);
     }

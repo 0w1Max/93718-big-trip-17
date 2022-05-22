@@ -41,7 +41,7 @@ class RandomIdSet {
     this.randomId = getRandomInteger(min, max);
 
     return this.randomId;
-  }
+  };
 
   getId = () => {
     let id = this.random(1, ID_COUNT);
@@ -53,8 +53,8 @@ class RandomIdSet {
     this.idSet.add(this.randomId);
 
     return this.randomId;
-  }
-};
+  };
+}
 
 export {
   getRandomInteger,
