@@ -14,8 +14,6 @@ const getRandomInteger = (a = 0, b = 1) => {
 const generateDate = (start = - 20, end = 20) =>
   dayjs()
     .add(getRandomInteger(start, end), 'day')
-    .add(getRandomInteger(start, end), 'hour')
-    .add(getRandomInteger(start, end), 'minute')
     .toDate();
 
 const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);

@@ -1,11 +1,15 @@
 import {getRandomInteger, generateDate} from '../utils.js';
+import dayjs from 'dayjs';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
 
 export const generatePoint = () => {
   const dateFrom = generateDate(- INTERVAR_OF_DAYS, 0);
-  const dateTo = generateDate(0, INTERVAR_OF_DAYS);
+  const dateTo = dayjs(dateFrom)
+    .add(getRandomInteger(0, 1), 'day')
+    .add(getRandomInteger(0, 1), 'hour')
+    .add(getRandomInteger(20, 59), 'minute');
 
   const generateOffersIdArray = () => {
     const offersIdArray = new Set;
