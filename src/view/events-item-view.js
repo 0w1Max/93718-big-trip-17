@@ -32,7 +32,7 @@ const eventsItemTemplate = (point, offer) => {
   const eventDuration = dayjs(dateTo).diff(dayjs(date), 'day', true);
   const days = Math.floor(eventDuration);
   const hours = Math.floor((eventDuration - days) * 24);
-  const minutes = Math.floor(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
+  const minutes = Math.round(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
 
   const showEventDuration = () => {
     if (days !== 0 && hours !== 0) {
