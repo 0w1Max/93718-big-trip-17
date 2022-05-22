@@ -8,38 +8,45 @@ export default class ListPresenter {
   #pointModel = null;
   #offerModel = null;
 
-  #eventListComponent = new EventsListView();
+  #eventsListComponent = new EventsListView();
 
   #points = [];
   #offers = [];
-
-  init = (container, pointModel, offerModel) => {
+  
+  constructor (container, pointModel, offerModel) {
     this.#container = container;
     this.#pointModel = pointModel;
     this.#offerModel = offerModel;
+  }
+
+  init = () => {
     this.#points = [...this.#pointModel.points];
     this.#offers = [...this.#offerModel.offers];
 
     // console.log(this.#points);
     // console.log(this.#offers);
 
-    render(this.#eventListComponent, this.#container);
+    this.#renderListPoint();
+  };
+
+  #renderListPoint = () => {
+    render(this.#eventsListComponent, this.#container);  
 
     for (let i = 0; i < this.#points.length; i++) {
       this.#renderPoint(this.#points[i], this.#offers);
     }
-  };
+  }
 
   #renderPoint = (point, offer) => {
     const pointComponent = new EventsItemView(point, offer);
     const editPointComponent = new EditPointView(point, offer);
 
     const replacePointToForm = () => {
-      this.#eventListComponent.element.replaceChild(editPointComponent.element, pointComponent.element);
+      this.#eventsListComponent.element.replaceChild(editPointComponent.element, pointComponent.element);
     };
 
     const replaceFormToPoint = () => {
-      this.#eventListComponent.element.replaceChild(pointComponent.element, editPointComponent.element);
+      this.#eventsListComponent.element.replaceChild(pointComponent.element, editPointComponent.element);
     };
 
     const onEscKeyDown = (evt) => {
@@ -70,6 +77,6 @@ export default class ListPresenter {
       document.removeEventListener('keydown', onEscKeyDown);
     });
 
-    render(pointComponent, this.#eventListComponent.element);
+    render(pointComponent, this.#eventsListComponent.element);
   };
 }

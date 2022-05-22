@@ -9,12 +9,12 @@ import OfferModel from './model/offer-model.js';
 const tripMainElement = document.querySelector('.trip-main');
 const tripFiltersElement = document.querySelector('.trip-controls__filters');
 const tripEventsElement = document.querySelector('.trip-events');
-const listPresenter = new ListPresenter();
 const pointModel = new PointModel();
 const offerModel = new OfferModel();
+const listPresenter = new ListPresenter(tripEventsElement, pointModel, offerModel);
 
 render(new TripInfoView(), tripMainElement, RenderPosition.AFTERBEGIN);
 render(new TripFilterView(), tripFiltersElement, RenderPosition.BEFOREEND);
 render(new TripSortView(), tripEventsElement, RenderPosition.AFTERBEGIN);
 
-listPresenter.init(tripEventsElement, pointModel, offerModel);
+listPresenter.init();
