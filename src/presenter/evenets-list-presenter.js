@@ -1,13 +1,21 @@
-import {render} from '../render.js';
+import {render, RenderPosition} from '../render.js';
+import TripInfoView from '../view/trip-info-view.js';
+import TripFilterView from '../view/trip-filter-view.js';
+import TripSortView from '../view/trip-sort-view.js';
 import EventsListView from '../view/events-list-view.js';
 import EventsItemView from '../view/events-item-view.js';
 import EditPointView from '../view/edit-point-view.js';
+import ListEmptyView from '../view/list-empty-view.js';
 
 export default class ListPresenter {
   #container = null;
   #pointModel = null;
   #offerModel = null;
 
+  #listEmptyComponent = new ListEmptyView();
+  #tripInfoComponent = new TripInfoView();
+  #tripFilterComponent = new TripFilterView();
+  #tripSortComponent = new TripSortView();
   #eventsListComponent = new EventsListView();
 
   #points = [];
@@ -30,7 +38,22 @@ export default class ListPresenter {
   };
 
   #renderListPoint = () => {
-    render(this.#eventsListComponent, this.#container);  
+    const tripMainElement = document.querySelector('.trip-main');
+    const tripFiltersElement = document.querySelector('.trip-controls__filters');
+
+    if (this.#points.length === 0) {
+      render(this.#tripFilterComponent, tripFiltersElement, RenderPosition.BEFOREEND);
+      render(this.#listEmptyComponent, this.#container)
+    } else {
+      render(this.#tripInfoComponent, tripMainElement, RenderPosition.AFTERBEGIN);
+      render(this.#tripFilterComponent, tripFiltersElement, RenderPosition.BEFOREEND);
+      render(this.#tripSortComponent, this.#container);
+      render(this.#eventsListComponent, this.#container);
+
+      for (let i = 0; i < this.#points.length; i++) {
+        this.#renderPoint(this.#points[i], this.#offers);
+      }  
+    }
 
     for (let i = 0; i < this.#points.length; i++) {
       this.#renderPoint(this.#points[i], this.#offers);
