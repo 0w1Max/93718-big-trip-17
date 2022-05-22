@@ -20,7 +20,7 @@ export default class ListPresenter {
 
   #points = [];
   #offers = [];
-  
+
   constructor (container, pointModel, offerModel) {
     this.#container = container;
     this.#pointModel = pointModel;
@@ -43,7 +43,7 @@ export default class ListPresenter {
 
     if (this.#points.length === 0) {
       render(this.#tripFilterComponent, tripFiltersElement, RenderPosition.BEFOREEND);
-      render(this.#listEmptyComponent, this.#container)
+      render(this.#listEmptyComponent, this.#container);
     } else {
       render(this.#tripInfoComponent, tripMainElement, RenderPosition.AFTERBEGIN);
       render(this.#tripFilterComponent, tripFiltersElement, RenderPosition.BEFOREEND);
@@ -52,13 +52,13 @@ export default class ListPresenter {
 
       for (let i = 0; i < this.#points.length; i++) {
         this.#renderPoint(this.#points[i], this.#offers);
-      }  
+      }
     }
 
     for (let i = 0; i < this.#points.length; i++) {
       this.#renderPoint(this.#points[i], this.#offers);
     }
-  }
+  };
 
   #renderPoint = (point, offer) => {
     const pointComponent = new EventsItemView(point, offer);
