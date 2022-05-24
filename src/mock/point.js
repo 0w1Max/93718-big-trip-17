@@ -1,6 +1,6 @@
 import {getRandomInteger, generateDate} from '../utils.js';
 import dayjs from 'dayjs';
-import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES} from '../const.js';
+import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
 
@@ -13,12 +13,11 @@ export const generatePoint = () => {
 
   const generateOffersIdArray = () => {
     const offersIdArray = new Set;
-    let randomId = getRandomInteger(1, 5);
 
-    for (let i = 0; i <= getRandomInteger(0, 5); i++) {
+    for (let i = 0; i <= getRandomInteger(0, 30); i++) {
+      const randomId = getRandomInteger(1, ID_COUNT);
+
       offersIdArray.add(randomId);
-
-      randomId = getRandomInteger(1, 5);
     }
 
     return Array.from(offersIdArray);

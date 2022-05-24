@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import {ID_COUNT} from './const.js';
 
 const DATE_FORMAT = 'DD/MM/YY hh:mm';
 
@@ -33,11 +34,34 @@ const isCheckedOffer = (pointIdArray, offerId) =>
     ? 'checked'
     : '';
 
+class RandomIdSet {
+  idSet = new Set();
+
+  random = (min, max) => {
+    this.randomId = getRandomInteger(min, max);
+
+    return this.randomId;
+  };
+
+  getId = () => {
+    let id = this.random(1, ID_COUNT);
+
+    while (this.idSet.has(id) === true) {
+      id = this.random(1, ID_COUNT);
+    }
+
+    this.idSet.add(this.randomId);
+
+    return this.randomId;
+  };
+}
+
 export {
   getRandomInteger,
   generateDate,
   getDate,
   isFavoriteClass,
   isCheckedType,
-  isCheckedOffer
+  isCheckedOffer,
+  RandomIdSet
 };
