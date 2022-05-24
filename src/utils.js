@@ -62,11 +62,11 @@ const isFutureDate = (date) => dayjs(date).isAfter(dayjs(), 'minute');
 
 const filter = {
   [FilterType.EVERYTHING]: (points) => points,
-  [FilterType.PAST]: (points) => points.filter((point) => isPastDate(point.dateTo)
-    || isPastDate(point.dateFrom) && isFutureDate(point.dateTo)),
   [FilterType.FUTURE]: (points) => points.filter((point) =>
   isCurrentDate(point.dateFrom) || isFutureDate(point.dateFrom)
-    || isPastDate(point.dateFrom) && isFutureDate(point.dateTo))
+    || isPastDate(point.dateFrom) && isFutureDate(point.dateTo)),
+  [FilterType.PAST]: (points) => points.filter((point) => isPastDate(point.dateTo)
+  || isPastDate(point.dateFrom) && isFutureDate(point.dateTo)),
 };
 
 export {
