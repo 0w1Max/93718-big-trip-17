@@ -1,4 +1,4 @@
-import {render, RenderPosition} from '../framework/render.js';
+import {render, replace, RenderPosition} from '../framework/render.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripFilterView from '../view/trip-filter-view.js';
 import TripSortView from '../view/trip-sort-view.js';
@@ -65,11 +65,11 @@ export default class ListPresenter {
     const editPointComponent = new EditPointView(point, offer);
 
     const replacePointToForm = () => {
-      this.#eventsListComponent.element.replaceChild(editPointComponent.element, pointComponent.element);
+      replace(editPointComponent, pointComponent);
     };
 
     const replaceFormToPoint = () => {
-      this.#eventsListComponent.element.replaceChild(pointComponent.element, editPointComponent.element);
+      replace(pointComponent, editPointComponent);
     };
 
     const onEscKeyDown = (evt) => {
