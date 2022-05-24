@@ -81,20 +81,19 @@ export default class ListPresenter {
       }
     };
 
-    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    pointComponent.setOpenEditClickHandler(() => {
       replacePointToForm();
 
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('form').addEventListener('submit', (evt) => {
-      evt.preventDefault();
+    editPointComponent.setFormSubmitHandler(() => {
       replaceFormToPoint();
 
       document.removeEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    editPointComponent.setCloseEditClickHandler(() => {
       replaceFormToPoint();
 
       document.removeEventListener('keydown', onEscKeyDown);
