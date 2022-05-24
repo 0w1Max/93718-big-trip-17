@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {ID_COUNT} from './const.js';
+import {ID_COUNT, FilterType} from './const.js';
 
 const DATE_FORMAT = 'DD/MM/YY hh:mm';
 
@@ -56,6 +56,19 @@ class RandomIdSet {
   };
 }
 
+const isCurrentDate = (date) => dayjs(date).isSame(dayjs(), 'minute');
+const isPastDate = (date) => dayjs(date).isBefore(dayjs(), 'minute');
+const isFutureDate = (date) => dayjs(date).isAfter(dayjs(), 'minute');
+
+const filter = {
+  [FilterType.EVERYTHING]: (points) => points,
+  [FilterType.PAST]: (points) => points.filter((point) => isPastDate(point.dateTo)
+    || isPastDate(point.dateFrom) && isFutureDate(point.dateTo)),
+  [FilterType.FUTURE]: (points) => points.filter((point) =>
+  isCurrentDate(point.dateFrom) || isFutureDate(point.dateFrom)
+    || isPastDate(point.dateFrom) && isFutureDate(point.dateTo))
+};
+
 export {
   getRandomInteger,
   generateDate,
@@ -63,5 +76,6 @@ export {
   isFavoriteClass,
   isCheckedType,
   isCheckedOffer,
-  RandomIdSet
+  RandomIdSet,
+  filter
 };
