@@ -1,4 +1,4 @@
-import {render, RenderPosition} from '../render.js';
+import {render, replace, RenderPosition} from '../framework/render.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripFilterView from '../view/trip-filter-view.js';
 import TripSortView from '../view/trip-sort-view.js';
@@ -65,11 +65,11 @@ export default class ListPresenter {
     const editPointComponent = new EditPointView(point, offer);
 
     const replacePointToForm = () => {
-      this.#eventsListComponent.element.replaceChild(editPointComponent.element, pointComponent.element);
+      replace(editPointComponent, pointComponent);
     };
 
     const replaceFormToPoint = () => {
-      this.#eventsListComponent.element.replaceChild(pointComponent.element, editPointComponent.element);
+      replace(pointComponent, editPointComponent);
     };
 
     const onEscKeyDown = (evt) => {
@@ -81,20 +81,19 @@ export default class ListPresenter {
       }
     };
 
-    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    pointComponent.setOpenEditClickHandler(() => {
       replacePointToForm();
 
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('form').addEventListener('submit', (evt) => {
-      evt.preventDefault();
+    editPointComponent.setFormSubmitHandler(() => {
       replaceFormToPoint();
 
       document.removeEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    editPointComponent.setCloseEditClickHandler(() => {
       replaceFormToPoint();
 
       document.removeEventListener('keydown', onEscKeyDown);

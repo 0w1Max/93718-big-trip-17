@@ -1,5 +1,5 @@
+import AbstractView from '../framework/view/abstract-view.js';
 import {getDate, isCheckedType, isCheckedOffer} from '../utils.js';
-import {createElement} from '../render.js';
 import {TYPES, CITIES} from '../const.js';
 
 const eventTypeItemTemplate = (point) => TYPES.map((type) => (
@@ -116,12 +116,12 @@ const editPointTemplate = (point, offer) => {
   </li>`;
 };
 
-export default class EditPointView {
-  #element = null;
+export default class EditPointView extends AbstractView {
   #point = null;
   #offer = null;
 
   constructor (point, offer) {
+    super();
     this.#point = point;
     this.#offer = offer;
   }
@@ -130,15 +130,24 @@ export default class EditPointView {
     return editPointTemplate(this.#point, this.#offer);
   }
 
-  get element () {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  setFormSubmitHandler = (callback) => {
+    this._callback.formSubmit = callback;
 
-    return this.#element;
-  }
+    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  };
 
-  removeElement () {
-    this.#element = null;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+
+    this._callback.formSubmit();
+  };
+
+  setCloseEditClickHandler = (callback) => {
+    this._callback.closeEditClick = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditClickHandler);
+  };
+
+  #closeEditClickHandler = () => {
+    this._callback.closeEditClick();
+  };
 }
