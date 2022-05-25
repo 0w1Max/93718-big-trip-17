@@ -9,18 +9,18 @@ const filterTemplate = (filters) => filters.map((filter, index) => {
     ? 'checked'
     : '';
 
-    return `<div class="trip-filters__filter">
-      <input
-      id="filter-${filter.name}"
-      class="trip-filters__filter-input visually-hidden"
-      type="radio"
-      name="trip-filter"
-      value="${filter.name}"
-      ${isDisabled()}
-      ${isChecked()}
-      >
-      <label class="trip-filters__filter-label" for="filter-${filter.name}">${filter.name}</label>
-    </div>`
+  return `<div class="trip-filters__filter">
+    <input
+    id="filter-${filter.name}"
+    class="trip-filters__filter-input visually-hidden"
+    type="radio"
+    name="trip-filter"
+    value="${filter.name}"
+    ${isDisabled()}
+    ${isChecked()}
+    >
+    <label class="trip-filters__filter-label" for="filter-${filter.name}">${filter.name}</label>
+  </div>`;
 }).join('');
 
 const tripFiltersTemplate = (filters) => (
