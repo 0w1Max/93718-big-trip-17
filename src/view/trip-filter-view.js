@@ -1,28 +1,44 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
-const tripFilterTemplate = () => (
+const filterTemplate = (filters) => filters.map((filter, index) => {
+  const isDisabled = () => filter.count === 0
+    ? 'disabled'
+    : '';
+
+  const isChecked = () => index === 0
+    ? 'checked'
+    : '';
+
+  return `<div class="trip-filters__filter">
+    <input
+    id="filter-${filter.name}"
+    class="trip-filters__filter-input visually-hidden"
+    type="radio"
+    name="trip-filter"
+    value="${filter.name}"
+    ${isDisabled()}
+    ${isChecked()}
+    >
+    <label class="trip-filters__filter-label" for="filter-${filter.name}">${filter.name}</label>
+  </div>`;
+}).join('');
+
+const tripFiltersTemplate = (filters) => (
   `<form class="trip-filters" action="#" method="get">
-    <div class="trip-filters__filter">
-      <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
-      <label class="trip-filters__filter-label" for="filter-everything">Everything</label>
-    </div>
-
-    <div class="trip-filters__filter">
-      <input id="filter-future" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="future">
-      <label class="trip-filters__filter-label" for="filter-future">Future</label>
-    </div>
-
-    <div class="trip-filters__filter">
-      <input id="filter-past" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="past">
-      <label class="trip-filters__filter-label" for="filter-past">Past</label>
-    </div>
-
+    ${filterTemplate(filters)}
     <button class="visually-hidden" type="submit">Accept filter</button>
   </form>`
 );
 
 export default class TripFilterView extends AbstractView {
+  #filters = null;
+
+  constructor (filters) {
+    super();
+    this.#filters = filters;
+  }
+
   get template () {
-    return tripFilterTemplate();
+    return tripFiltersTemplate(this.#filters);
   }
 }

@@ -22,4 +22,10 @@ const URL_PICTURES = 'http://picsum.photos/248/152?r=';
 const OFFERS_COUNT = 3;
 const ID_COUNT = TYPES.length * OFFERS_COUNT;
 
-export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT};
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past'
+};
+
+export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT, FilterType};
