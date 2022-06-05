@@ -35,20 +35,32 @@ export default class ListPresenter {
     this.#renderListPoint();
   };
 
-  #renderListPoint = () => {
+  #renderInfo = () => {
     const tripMainElement = document.querySelector('.trip-main');
 
-    if (this.#points.length === 0) {
-      render(this.#listEmptyComponent, this.#container);
-    } else {
-      render(this.#tripInfoComponent, tripMainElement, RenderPosition.AFTERBEGIN);
-      render(this.#tripSortComponent, this.#container);
-      render(this.#eventsListComponent, this.#container);
+    render(this.#tripInfoComponent, tripMainElement, RenderPosition.AFTERBEGIN);
+  };
 
-      for (let i = 0; i < this.#points.length; i++) {
-        this.#renderPoint(this.#points[i], this.#offers);
-      }
+  #renderEventsList = () => {
+    render(this.#eventsListComponent, this.#container);
+  };
+
+  #renderListEmpty = () => {
+    render(this.#listEmptyComponent, this.#container);
+  };
+
+  #renderSort = () => {
+    render(this.#tripSortComponent, this.#container);
+  };
+
+  #renderListPoint = () => {
+    if (this.#points.length === 0) {
+      this.#renderListEmpty();
     }
+
+    this.#renderInfo();
+    this.#renderSort();
+    this.#renderEventsList();
 
     for (let i = 0; i < this.#points.length; i++) {
       this.#renderPoint(this.#points[i], this.#offers);
