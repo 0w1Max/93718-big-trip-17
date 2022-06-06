@@ -17,6 +17,7 @@ export default class ListPresenter {
 
   #points = [];
   #offers = [];
+  #eventPresenter = new Map();
 
   constructor (container, pointModel, offerModel) {
     this.#container = container;
@@ -70,5 +71,12 @@ export default class ListPresenter {
     const eventPresenter = new EventPresenter(this.#eventsListComponent.element);
 
     eventPresenter.init(point, offer);
+
+    this.#eventPresenter.set(point.id, eventPresenter);
+  };
+
+  #clearPoints = () => {
+    this.#eventPresenter.forEach((presenter) => presenter.destroy());
+    this.#eventPresenter.clear();
   };
 }
