@@ -74,7 +74,7 @@ export default class ListPresenter {
   };
 
   #renderPoint = (point, offer) => {
-    const eventPresenter = new EventPresenter(this.#eventsListComponent.element);
+    const eventPresenter = new EventPresenter(this.#eventsListComponent.element, this.#handlePointChange);
 
     eventPresenter.init(point, offer);
 

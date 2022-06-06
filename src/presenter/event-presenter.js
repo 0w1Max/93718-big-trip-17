@@ -5,6 +5,7 @@ import EditPointView from '../view/edit-point-view.js';
 
 export default class EventPresenter {
   #pointContainer = null;
+  #changeData = null;
 
   #pointComponent = null;
   #editPointComponent = null;
@@ -12,8 +13,9 @@ export default class EventPresenter {
   #point = null;
   #offer = null;
 
-  constructor(pointContainer) {
+  constructor(pointContainer, changeData) {
     this.#pointContainer = pointContainer;
+    this.#changeData = changeData;
   }
 
   init = (point, offer) => {
