@@ -30,8 +30,8 @@ export default class ListPresenter {
     this.#points = [...this.#pointModel.points];
     this.#offers = [...this.#offerModel.offers];
 
-    console.log(this.#points);
-    console.log(this.#offers);
+    // console.log(this.#points);
+    // console.log(this.#offers);
 
     this.#renderListPoint();
   };

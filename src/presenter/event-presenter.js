@@ -34,7 +34,7 @@ export default class EventPresenter {
 
     this.#pointComponent = new EventsItemView(point, offer);
     this.#editPointComponent = new EditPointView(point, offer);
-    
+
     this.#pointComponent.setFavoriteClickHandler(this.#handleFavoriteClick);
 
     this.#pointComponent.setOpenEditClickHandler(() => {
