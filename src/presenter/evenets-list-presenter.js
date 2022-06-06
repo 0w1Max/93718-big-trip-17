@@ -30,10 +30,14 @@ export default class ListPresenter {
     this.#points = [...this.#pointModel.points];
     this.#offers = [...this.#offerModel.offers];
 
-    // console.log(this.#points);
-    // console.log(this.#offers);
+    console.log(this.#points);
+    console.log(this.#offers);
 
     this.#renderListPoint();
+  };
+
+  #handleModeChange = () => {
+    this.#eventPresenter.forEach((presenter) => presenter.resetView());
   };
 
   #handlePointChange = (updatedPoint) => {
@@ -74,7 +78,9 @@ export default class ListPresenter {
   };
 
   #renderPoint = (point, offer) => {
-    const eventPresenter = new EventPresenter(this.#eventsListComponent.element, this.#handlePointChange);
+    const eventPresenter = new EventPresenter(
+      this.#eventsListComponent.element, this.#handlePointChange, this.#handleModeChange
+    );
 
     eventPresenter.init(point, offer);
 
