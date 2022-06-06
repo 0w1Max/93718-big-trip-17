@@ -1,4 +1,4 @@
-import {render, replace} from '../framework/render.js';
+import {render, replace, remove} from '../framework/render.js';
 import EventsItemView from '../view/events-item-view.js';
 import EditPointView from '../view/edit-point-view.js';
 
@@ -19,6 +19,9 @@ export default class EventPresenter {
   init = (point, offer) => {
     this.#point = point;
     this.#offer = offer;
+
+    const prevPointComponent = this.#pointComponent;
+    const prevEditPointComponent = this.#editPointComponent;
 
     this.#pointComponent = new EventsItemView(point, offer);
     this.#editPointComponent = new EditPointView(point, offer);
@@ -41,7 +44,27 @@ export default class EventPresenter {
       document.removeEventListener('keydown', this.#onEscKeyDown);
     });
 
-    render(this.#pointComponent, this.#pointContainer);
+    if (prevPointComponent === null || prevEditPointComponent === null) {
+      render(this.#pointComponent, this.#pointContainer);
+
+      return;
+    }
+
+    if (this.#pointContainer.contains(prevPointComponent.element)) {
+      replace(this.#pointComponent, prevPointComponent);
+    }
+
+    if (this.#pointContainer.contains(prevEditPointComponent.element)) {
+      replace(this.#editPointComponent, prevEditPointComponent);
+    }
+
+    remove(prevPointComponent);
+    remove(prevEditPointComponent);
+  };
+
+  destroy = () => {
+    remove(this.#pointComponent);
+    remove(this.#editPointComponent);
   };
 
   #replacePointToForm = () => {
