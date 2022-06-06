@@ -27,6 +27,8 @@ export default class EventPresenter {
 
     this.#pointComponent = new EventsItemView(point, offer);
     this.#editPointComponent = new EditPointView(point, offer);
+    
+    this.#pointComponent.setFavoriteClickHandler(this.#handleFavoriteClick);
 
     this.#pointComponent.setOpenEditClickHandler(() => {
       this.#replacePointToForm();
@@ -84,5 +86,9 @@ export default class EventPresenter {
 
       document.removeEventListener('keydown', this.#onEscKeyDown);
     }
+  };
+
+  #handleFavoriteClick = () => {
+    this.#changeData({...this.#point, isFavorite: !this.#point.isFavorite});
   };
 }

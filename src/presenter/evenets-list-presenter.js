@@ -38,7 +38,7 @@ export default class ListPresenter {
 
   #handlePointChange = (updatedPoint) => {
     this.#points = updateItem(this.#points, updatedPoint);
-    this.#eventPresenter.get(updatedPoint.id).init(updatedPoint);
+    this.#eventPresenter.get(updatedPoint.id).init(updatedPoint, this.#offers);
   };
 
   #renderInfo = () => {
