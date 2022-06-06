@@ -1,4 +1,5 @@
 import {render, RenderPosition} from '../framework/render.js';
+import {updateItem} from '../utils.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripSortView from '../view/trip-sort-view.js';
 import EventsListView from '../view/events-list-view.js';
@@ -33,6 +34,11 @@ export default class ListPresenter {
     // console.log(this.#offers);
 
     this.#renderListPoint();
+  };
+
+  #handlePointChange = (updatedPoint) => {
+    this.#points = updateItem(this.#points, updatedPoint);
+    this.#eventPresenter.get(updatedPoint.id).init(updatedPoint);
   };
 
   #renderInfo = () => {
