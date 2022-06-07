@@ -42,7 +42,7 @@ const eventsItemTemplate = (point, offer) => {
                 &mdash;
                 <time class="event__end-time" datetime="${getDate(dateTo)}">${eventEndTime}</time>
             </p>
-            <p class="event__duration">${showEventDuration(dateFrom, dateTo)}</p>
+            <p class="event__duration">${showEventDuration(dateTo, dateFrom)}</p>
         </div>
         <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>

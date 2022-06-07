@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import {ID_COUNT, FilterType} from './const.js';
 
-const DATE_FORMAT = 'DD/MM/YY hh:mm';
+const DATE_FORMAT = 'DD/MM/YY HH:MM';
 
 // Функция из интернета по генерации случайного числа из диапазона
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
@@ -15,23 +15,23 @@ const getRandomInteger = (a = 0, b = 1) => {
 const generateDate = (start = - 20, end = 20) =>
   dayjs()
     .add(getRandomInteger(start, end), 'day')
+    .add(getRandomInteger(start, end), 'minute')
     .toDate();
 
 const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
 
-const showEventDuration = (dateFrom, dateTo) => {
-  const date = dateFrom;
-  const eventDuration = dayjs(dateTo).diff(dayjs(date), 'day', true);
-  const days = Math.floor(eventDuration);
-  const hours = Math.floor((eventDuration - days) * 24);
-  const minutes = Math.round(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
-
+const showEventDuration = (dateTo, dateFrom) => {
+  const durationInMinutes = dayjs(dateTo).diff(dayjs(dateFrom), 'minute');
+  const days = Math.floor(durationInMinutes / 60 / 24);
+  const hours = Math.floor(durationInMinutes / 60 - days * 24);
+  const minutes = durationInMinutes - (days * 24 * 60 + hours * 60);
+  
   if (days !== 0 && hours !== 0) {
-    return `0${days}D 0${hours}H ${minutes}M`;
-  } else if (hours !== 0) {
-    return `0${hours}H ${minutes}M`;
+    return `${days}D ${hours}H ${minutes}M`
+  } else if (days === 0 && hours !== 0) {
+    return `${hours}H ${minutes}M`
   } else {
-    return `${minutes}M`;
+    return `${minutes}M`
   }
 };
 
