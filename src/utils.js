@@ -19,6 +19,22 @@ const generateDate = (start = - 20, end = 20) =>
 
 const getDate = (currentDate, format = DATE_FORMAT) => dayjs(currentDate).format(format);
 
+const showEventDuration = (dateFrom, dateTo) => {
+  const date = dateFrom;
+  const eventDuration = dayjs(dateTo).diff(dayjs(date), 'day', true);
+  const days = Math.floor(eventDuration);
+  const hours = Math.floor((eventDuration - days) * 24);
+  const minutes = Math.round(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
+
+  if (days !== 0 && hours !== 0) {
+    return `0${days}D 0${hours}H ${minutes}M`;
+  } else if (hours !== 0) {
+    return `0${hours}H ${minutes}M`;
+  } else {
+    return `${minutes}M`;
+  }
+};
+
 const isFavoriteClass = (isFavorite) =>
   isFavorite
     ? 'event__favorite-btn--active'
@@ -103,5 +119,6 @@ export {
   filter,
   updateItem,
   sortEventTime,
-  sortEventPrice
+  sortEventPrice,
+  showEventDuration
 };
