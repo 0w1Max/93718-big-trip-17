@@ -71,6 +71,8 @@ export default class ListPresenter {
     }
 
     this.#sortPoints(sortType);
+    this.#clearPoints();
+    this.#renderListPoint();
   };
 
   #renderInfo = () => {
