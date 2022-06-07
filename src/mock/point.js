@@ -1,4 +1,5 @@
-import {getRandomInteger, generateDate} from '../utils.js';
+import {getRandomInteger} from '../utils/common-utils.js';
+import {generateDate} from '../utils/date-utils.js';
 import dayjs from 'dayjs';
 import {nanoid} from 'nanoid';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT} from '../const.js';

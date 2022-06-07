@@ -1,5 +1,5 @@
 import {render, RenderPosition} from '../framework/render.js';
-import {updateItem, sortEventTime, sortEventPrice} from '../utils.js';
+import {updateItem, sortEventTime, sortEventPrice} from '../utils/point-utils.js';
 import {SortType} from '../const.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripSortView from '../view/trip-sort-view.js';

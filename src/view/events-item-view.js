@@ -1,5 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import {getDate, showEventDuration, isFavoriteClass} from '../utils.js';
+import {getDate, showEventDuration} from '../utils/date-utils.js';
+import {isFavoriteClass} from '../utils/point-utils.js';
 
 const selectedOffersTemplate = (point, offer) => offer.map((offers) =>
   offers.offers.map((item) =>
