@@ -83,6 +83,15 @@ const updateItem = (items, update) => {
   ];
 };
 
+const sortEventTime = (pointA, pointB) => {
+  const durationDateA = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
+  const durationDateB = dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom));
+
+  return durationDateB - durationDateA;
+};
+
+const sortEventPrice = (pointA, pointB) => pointB.price - pointA.price;
+
 export {
   getRandomInteger,
   generateDate,
@@ -92,5 +101,7 @@ export {
   isCheckedOffer,
   RandomIdSet,
   filter,
-  updateItem
+  updateItem,
+  sortEventTime,
+  sortEventPrice
 };
