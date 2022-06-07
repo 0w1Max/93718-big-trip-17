@@ -1,5 +1,6 @@
 import {getRandomInteger, generateDate} from '../utils.js';
 import dayjs from 'dayjs';
+import {nanoid} from 'nanoid';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT} from '../const.js';
 
 const INTERVAR_OF_DAYS = 20;
@@ -37,7 +38,7 @@ export const generatePoint = () => {
         }
       ]
     },
-    id: getRandomInteger(1, 20),
+    id: nanoid(),
     isFavorite: getRandomInteger(0, 1),
     offersArray: generateOffersIdArray(),
     type: TYPES[getRandomInteger(0, TYPES.length - 1)]
