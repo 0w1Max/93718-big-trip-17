@@ -1,7 +1,7 @@
 import {render} from './framework/render.js';
 import TripFilterView from './view/trip-filter-view.js';
 import {generateFilter} from './mock/filter.js';
-import ListPresenter from './presenter/evenets-list-presenter.js';
+import ListPresenter from './presenter/events-list-presenter.js';
 import PointModel from './model/point-model.js';
 import OfferModel from './model/offer-model.js';
 
