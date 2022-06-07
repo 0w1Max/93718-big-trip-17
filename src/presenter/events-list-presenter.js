@@ -1,5 +1,4 @@
 import {render, RenderPosition} from '../framework/render.js';
-import {updateItem} from '../utils.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripSortView from '../view/trip-sort-view.js';
 import EventsListView from '../view/events-list-view.js';
@@ -45,6 +44,10 @@ export default class ListPresenter {
     this.#eventPresenter.get(updatedPoint.id).init(updatedPoint, this.#offers);
   };
 
+  #handleSortTypeChange = (sortType) => {
+
+  };
+
   #renderInfo = () => {
     const tripMainElement = document.querySelector('.trip-main');
 
@@ -61,6 +64,8 @@ export default class ListPresenter {
 
   #renderSort = () => {
     render(this.#tripSortComponent, this.#container);
+
+    this.#tripSortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
   };
 
   #renderListPoint = () => {
