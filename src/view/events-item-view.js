@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import dayjs from 'dayjs';
-import {getDate, isFavoriteClass} from '../utils.js';
+import {getDate, showEventDuration} from '../utils/date-utils.js';
+import {isFavoriteClass} from '../utils/point-utils.js';
 
 const selectedOffersTemplate = (point, offer) => offer.map((offers) =>
   offers.offers.map((item) =>
@@ -29,21 +29,7 @@ const eventsItemTemplate = (point, offer) => {
   const date = dateFrom;
   const eventStartTime = getDate(date, 'hh:mm');
   const eventEndTime = getDate(dateTo, 'hh:mm');
-  const eventDuration = dayjs(dateTo).diff(dayjs(date), 'day', true);
-  const days = Math.floor(eventDuration);
-  const hours = Math.floor((eventDuration - days) * 24);
-  const minutes = Math.round(eventDuration * 24 * 60 - (days * 24 * 60 + hours * 60));
 
-  const showEventDuration = () => {
-    if (days !== 0 && hours !== 0) {
-      return `0${days}D 0${hours}H ${minutes}M`;
-    } else if (hours !== 0) {
-      return `0${hours}H ${minutes}M`;
-    } else {
-      return `${minutes}M`;
-    }
-
-  };
   return `<li class="trip-events__item">
     <div class="event">
         <time class="event__date" datetime="${getDate(date, 'YYYY-MM-DD')}">${getDate(date, 'MMM DD')}</time>
@@ -55,9 +41,9 @@ const eventsItemTemplate = (point, offer) => {
             <p class="event__time">
                 <time class="event__start-time" datetime="${getDate(date)}">${eventStartTime}</time>
                 &mdash;
-                <time class="event__end-time" datetime="${getDate(date)}">${eventEndTime}</time>
+                <time class="event__end-time" datetime="${getDate(dateTo)}">${eventEndTime}</time>
             </p>
-            <p class="event__duration">${showEventDuration()}</p>
+            <p class="event__duration">${showEventDuration(dateTo, dateFrom)}</p>
         </div>
         <p class="event__price">&euro;&nbsp;<span class="event__price-value">${price}</span></p>
         <h4 class="visually-hidden">Offers:</h4>

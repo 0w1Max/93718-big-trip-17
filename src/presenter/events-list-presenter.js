@@ -1,5 +1,6 @@
 import {render, RenderPosition} from '../framework/render.js';
-import {updateItem} from '../utils.js';
+import {updateItem, sortEventTime, sortEventDay, sortEventPrice} from '../utils/point-utils.js';
+import {SortType} from '../const.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripSortView from '../view/trip-sort-view.js';
 import EventsListView from '../view/events-list-view.js';
@@ -19,6 +20,8 @@ export default class ListPresenter {
   #points = [];
   #offers = [];
   #eventPresenter = new Map();
+  #currentSortType = SortType.DEFAULT;
+  #sourcedListPoints = [];
 
   constructor (container, pointModel, offerModel) {
     this.#container = container;
@@ -27,8 +30,9 @@ export default class ListPresenter {
   }
 
   init = () => {
-    this.#points = [...this.#pointModel.points];
+    this.#points = sortEventDay([...this.#pointModel.points]);
     this.#offers = [...this.#offerModel.offers];
+    this.#sourcedListPoints = [...this.#pointModel.points];
 
     // console.log(this.#points);
     // console.log(this.#offers);
@@ -42,7 +46,33 @@ export default class ListPresenter {
 
   #handlePointChange = (updatedPoint) => {
     this.#points = updateItem(this.#points, updatedPoint);
+    this.#sourcedListPoints = updateItem(this.#sourcedListPoints, updatedPoint);
     this.#eventPresenter.get(updatedPoint.id).init(updatedPoint, this.#offers);
+  };
+
+  #sortPoints = (sortType) => {
+    switch (sortType) {
+      case SortType.TIME:
+        this.#points.sort(sortEventTime);
+        break;
+      case SortType.PRICE:
+        this.#points.sort(sortEventPrice);
+        break;
+      default:
+        this.#points = sortEventDay([...this.#sourcedListPoints]);
+    }
+
+    this.#currentSortType = sortType;
+  };
+
+  #handleSortTypeChange = (sortType) => {
+    if (this.#currentSortType === sortType) {
+      return;
+    }
+
+    this.#sortPoints(sortType);
+    this.#clearPoints();
+    this.#renderListPoint();
   };
 
   #renderInfo = () => {
@@ -61,6 +91,8 @@ export default class ListPresenter {
 
   #renderSort = () => {
     render(this.#tripSortComponent, this.#container);
+
+    this.#tripSortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
   };
 
   #renderListPoint = () => {

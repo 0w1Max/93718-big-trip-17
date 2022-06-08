@@ -1,4 +1,5 @@
-import {getRandomInteger, generateDate} from '../utils.js';
+import {getRandomInteger} from '../utils/common-utils.js';
+import {generateDate} from '../utils/date-utils.js';
 import dayjs from 'dayjs';
 import {nanoid} from 'nanoid';
 import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT} from '../const.js';
@@ -6,10 +7,10 @@ import {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT} from '../const.js';
 const INTERVAR_OF_DAYS = 20;
 
 export const generatePoint = () => {
-  const dateFrom = generateDate(- INTERVAR_OF_DAYS, 0);
-  const dateTo = dayjs(dateFrom)
-    .add(getRandomInteger(0, 1), 'day')
-    .add(getRandomInteger(0, 1), 'hour')
+  const date = generateDate(- INTERVAR_OF_DAYS, 0);
+  const dateFrom = dayjs(date);
+  const dateTo = dayjs(date)
+    .add(getRandomInteger(0, 10), 'hour')
     .add(getRandomInteger(20, 59), 'minute');
 
   const generateOffersIdArray = () => {

@@ -28,4 +28,10 @@ const FilterType = {
   PAST: 'past'
 };
 
-export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT, FilterType};
+const SortType = {
+  DEFAULT: 'default',
+  TIME: 'time',
+  PRICE: 'price',
+};
+
+export {TYPES, CITIES, DESCRIPTIONS, URL_PICTURES, ID_COUNT, FilterType, SortType};

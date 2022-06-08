@@ -1,5 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import {getDate, isCheckedType, isCheckedOffer} from '../utils.js';
+import {getDate} from '../utils/date-utils.js';
+import {isCheckedType, isCheckedOffer} from '../utils/point-utils.js';
 import {TYPES, CITIES} from '../const.js';
 
 const eventTypeItemTemplate = (point) => TYPES.map((type) => (
