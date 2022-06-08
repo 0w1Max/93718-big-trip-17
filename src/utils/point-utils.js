@@ -50,6 +50,17 @@ const sortEventTime = (pointA, pointB) => {
   return durationDateB - durationDateA;
 };
 
+const sortEventDay = (points) => points.sort((first, second) => second.dateFrom - first.dateFrom);
+
 const sortEventPrice = (pointA, pointB) => pointB.price - pointA.price;
 
-export {isFavoriteClass, isCheckedType, isCheckedOffer, filter, updateItem, sortEventTime, sortEventPrice};
+export {
+  isFavoriteClass,
+  isCheckedType,
+  isCheckedOffer,
+  filter,
+  updateItem,
+  sortEventTime,
+  sortEventPrice,
+  sortEventDay
+};

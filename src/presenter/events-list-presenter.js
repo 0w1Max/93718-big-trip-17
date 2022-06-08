@@ -1,5 +1,5 @@
 import {render, RenderPosition} from '../framework/render.js';
-import {updateItem, sortEventTime, sortEventPrice} from '../utils/point-utils.js';
+import {updateItem, sortEventTime, sortEventDay, sortEventPrice} from '../utils/point-utils.js';
 import {SortType} from '../const.js';
 import TripInfoView from '../view/trip-info-view.js';
 import TripSortView from '../view/trip-sort-view.js';
@@ -30,7 +30,7 @@ export default class ListPresenter {
   }
 
   init = () => {
-    this.#points = [...this.#pointModel.points];
+    this.#points = sortEventDay([...this.#pointModel.points]);
     this.#offers = [...this.#offerModel.offers];
     this.#sourcedListPoints = [...this.#pointModel.points];
 
@@ -59,7 +59,7 @@ export default class ListPresenter {
         this.#points.sort(sortEventPrice);
         break;
       default:
-        this.#points = [...this.#sourcedListPoints];
+        this.#points = sortEventDay([...this.#sourcedListPoints]);
     }
 
     this.#currentSortType = sortType;
